@@ -31,7 +31,7 @@ local function collides(x, y, size)
     return false
 end
 
-Player = Object:extend()
+local Player = Object:extend()
 
 function Player:new()
     self.x = _G.TILE_SIZE
