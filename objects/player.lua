@@ -34,7 +34,7 @@ end
 
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
-
+    -- TEsound.play()
     if collectedChar == 'x' then
         TIMER:during(10, function() self.isInvincible = true end, function() self.isInvincible = false end)
     elseif collectedChar == '/' then
