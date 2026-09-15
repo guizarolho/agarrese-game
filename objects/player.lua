@@ -1,11 +1,12 @@
 local Player = Object:extend()
 
-function Player:new(stage)
+function Player:new(stage, visionRadius)
     self.x = _G.TILE_SIZE
     self.y = _G.TILE_SIZE
     self.speed = 200
     self.size = 30
     self.stage = stage
+    self.visionRadius = visionRadius
 
     self.memoriesCollected = 0
     self.score = 0
@@ -38,6 +39,7 @@ function Player:collect(col, row)
         self.score = self.score + 10
     elseif collectedChar == 'o' then
         self.memoriesCollected = self.memoriesCollected + 1
+        self.visionRadius:alter(self.visionRadius.radius + 100)
     end
 end
 

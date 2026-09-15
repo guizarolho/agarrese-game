@@ -2,8 +2,8 @@ GameScene = Object:extend()
 
 function GameScene:new()
     self.stage = Stage()
-    self.player = Player(self.stage)
-    self.visionRadius = VisionRadius(self.player.x, self.player.y)
+    self.visionRadius = VisionRadius()
+    self.player = Player(self.stage, self.visionRadius)
     self.gameTimer = GameTimer(TIME_LIMIT)
 
     self.gameOver = false

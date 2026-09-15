@@ -1,9 +1,7 @@
 -- https://love2d.org/wiki/love.graphics.setStencil
 VisionRadius = Object:extend()
 
-function VisionRadius:new(x, y)
-    self.x = x
-    self.y = y
+function VisionRadius:new()
     self.radius = 300
 end
 
