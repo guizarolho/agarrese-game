@@ -1,5 +1,5 @@
 local function isWall(col, row)
-    local rowStr = MapGrid[row]
+    local rowStr = Stage.grid[row]
     if not rowStr then return true end
     local char = rowStr:sub(col, col)
     if char == '' then return true end
