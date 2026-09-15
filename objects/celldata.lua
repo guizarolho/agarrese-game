@@ -1,4 +1,4 @@
-CellData = Object:extend()
+local CellData = Object:extend()
 
 function CellData:new(isObstacle, isCollectable)
     self.obstacle = isObstacle

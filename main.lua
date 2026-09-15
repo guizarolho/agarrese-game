@@ -8,18 +8,18 @@ function love.load()
     CellData = require "objects/celldata"
     GameTimer = require "objects/gametimer"
 
-    WINDOW_HEIGHT = 1920
-    WINDOW_WIDTH = 1080
     TILE_SIZE = 32
-    FONT = love.graphics.newFont(18)
-    GAME_OVER = false
     TIME_LIMIT = 60
     TIMER = Timer()
+    FONT = love.graphics.newFont(18)
+    GAME_OVER = false
+    WINDOW_HEIGHT = 1920
+    WINDOW_WIDTH = 1080
 
     Stage:new()
     Player:new()
-    -- Enemy:new()
     GameTimer:new(TIME_LIMIT)
+    -- Enemy:new()
 end
 
 function love.update(dt)
