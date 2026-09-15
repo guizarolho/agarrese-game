@@ -7,10 +7,10 @@ local function isWall(col, row)
 end
 
 local function collides(x, y, size)
-    local left   = math.floor(x / TileSize) + 1
-    local right  = math.floor((x + size - 1) / TileSize) + 1
-    local top    = math.floor(y / TileSize) + 1
-    local bottom = math.floor((y + size - 1) / TileSize) + 1
+    local left   = math.floor(x / _G.TILE_SIZE) + 1
+    local right  = math.floor((x + size - 1) / _G.TILE_SIZE) + 1
+    local top    = math.floor(y / _G.TILE_SIZE) + 1
+    local bottom = math.floor((y + size - 1) / _G.TILE_SIZE) + 1
 
     for row = top, bottom do
         for col = left, right do
