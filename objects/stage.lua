@@ -53,6 +53,9 @@ function Stage:draw()
             elseif char == 'o' then
                 love.graphics.setColor(1, 1, 0.4)
                 love.graphics.circle("fill", px + TILE_SIZE/2, py + TILE_SIZE/2, TILE_SIZE/3)
+            elseif char == '.' then
+                love.graphics.setColor(1, 1, 1)
+                love.graphics.circle("fill", px + TILE_SIZE/2, py + TILE_SIZE/2, TILE_SIZE/6)
             end
         end
     end
