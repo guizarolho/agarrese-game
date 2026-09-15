@@ -1,7 +1,6 @@
-Stage = Object:extend()
+local Stage = Object:extend()
 
 function Stage:new()
-    -- TILE = love.graphics.newImage('')
     self.grid = {
         '############################',
         '#............##............#',
@@ -35,27 +34,66 @@ function Stage:new()
         '#..........................#',
         '############################'
     }
+
+    self.cells = {}
+
+    self:buildGrid()
 end
 
-function Stage:update()
+function Stage:buildGrid()
+    for row, rowStr in ipairs(self.grid) do
+        self.cells[row] = {}
+
+        for col = 1, #rowStr do
+            local char = rowStr:sub(col, col)
+
+            local isObstacle = char == '#'
+            local isCollectable = char == '.' or char == 'o'
+
+            self.cells[row][col] = CellData(
+                isObstacle,
+                isCollectable
+            )
+        end
+    end
 end
 
 function Stage:draw()
-    for row, rowStr in ipairs(Stage.grid) do
+    for row, rowStr in ipairs(self.grid) do
         for col = 1, #rowStr do
+
             local char = rowStr:sub(col, col)
+
             local px = (col - 1) * TILE_SIZE
             local py = (row - 1) * TILE_SIZE
 
             if char == '#' then
                 love.graphics.setColor(0.3, 0.3, 0.3)
-                love.graphics.rectangle("fill", px, py, TILE_SIZE, TILE_SIZE)
+                love.graphics.rectangle(
+                    "fill",
+                    px,
+                    py,
+                    TILE_SIZE,
+                    TILE_SIZE
+                )
+
             elseif char == 'o' then
                 love.graphics.setColor(1, 1, 0.4)
-                love.graphics.circle("fill", px + TILE_SIZE/2, py + TILE_SIZE/2, TILE_SIZE/3)
+                love.graphics.circle(
+                    "fill",
+                    px + TILE_SIZE / 2,
+                    py + TILE_SIZE / 2,
+                    TILE_SIZE / 3
+                )
+
             elseif char == '.' then
                 love.graphics.setColor(1, 1, 1)
-                love.graphics.circle("fill", px + TILE_SIZE/2, py + TILE_SIZE/2, TILE_SIZE/6)
+                love.graphics.circle(
+                    "fill",
+                    px + TILE_SIZE / 2,
+                    py + TILE_SIZE / 2,
+                    TILE_SIZE / 6
+                )
             end
         end
     end

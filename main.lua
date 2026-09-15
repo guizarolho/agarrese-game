@@ -2,6 +2,7 @@ function love.load()
     Object = require "sti/classic"
     Player = require "objects/player"
     Stage = require "objects/stage"
+    CellData = require "objects/celldata"
 
     Stage:new()
     Player:new()
@@ -17,6 +18,6 @@ function love.update(dt)
 end
 
 function love.draw()
-    Player:draw()
     Stage:draw()
+    Player:draw()
 end

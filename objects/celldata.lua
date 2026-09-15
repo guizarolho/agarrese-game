@@ -1,7 +1,7 @@
 CellData = Object:extend()
 
 function CellData:new(isObstacle, isCollectable)
-    self.passable = isObstacle
+    self.obstacle = isObstacle
     self.collectable = isCollectable
 end
 
