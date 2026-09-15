@@ -1,38 +1,50 @@
 function love.load()
+    -- Import Libs
     Object = require "lib/classic"
     Timer = require "lib/timer"
 
+    -- Import Objects
     Player = require "objects/player"
     Enemy = require "objects/enemy"
     Stage = require "objects/stage"
     CellData = require "objects/celldata"
     GameTimer = require "objects/gametimer"
 
+    -- Import Scene
+    SceneManager = require "scenes/scenemanager"
+    Menu = require "scenes/menu"
+    GameScene = require "scenes/gamescene"
+    SceneEnum = require "scenes/sceneenum"
+    
+    -- Global Variables
     TILE_SIZE = 32
     TIME_LIMIT = 60
     TIMER = Timer()
     FONT = love.graphics.newFont(18)
     GAME_OVER = false
-    WINDOW_HEIGHT = 1920
-    WINDOW_WIDTH = 1080
+    WINDOW_WIDTH = 1920
+    WINDOW_HEIGHT = 1080
 
-    Stage:new()
-    Player:new()
-    GameTimer:new(TIME_LIMIT)
-    -- Enemy:new()
+    -- Config SceneManager
+    MENU = Menu()
+    GAME = GameScene()
+
+    SceneManager:new()
+    SceneManager:addScene(SceneEnum.Menu, MENU)
+    SceneManager:addScene(SceneEnum.Game, GAME)
+    SceneManager:changeScene(SceneEnum.Menu)
 end
+
 
 function love.update(dt)
     TIMER:update(dt)
+    SceneManager:update(dt)
+end
 
-    if not GAME_OVER then
-        Player:update(dt)
-    end
+function love.keypressed(key)
+    SceneManager:keypressed(key)
 end
 
 function love.draw()
-    Stage:draw()
-    Player:draw()
-    GameTimer:draw()
-    -- Enemy:draw()
+    SceneManager:draw()
 end

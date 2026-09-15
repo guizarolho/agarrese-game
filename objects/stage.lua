@@ -69,6 +69,17 @@ function Stage:buildGrid()
     end
 end
 
+function Stage:isObstacle(col, row)
+    local cell = self:getCell(col, row)
+    return not cell or cell.obstacle
+end
+
+function Stage:getCell(col, row)
+    if row < 1 or row > #self.cells then return nil end
+    if col < 1 or col > #self.cells[row] then return nil end
+    return self.cells[row][col]
+end
+
 function Stage:draw()
     for row, rowStr in ipairs(self.grid) do
         for col = 1, #rowStr do

@@ -1,16 +1,14 @@
-local function getCell(col, row)
-    if row < 1 or row > #Stage.cells then
-        return nil
-    end
+local Player = Object:extend()
 
-    if col < 1 or col > #Stage.cells[row] then
-        return nil
-    end
-
-    return Stage.cells[row][col]
+function Player:new(stage)
+    self.x = _G.TILE_SIZE
+    self.y = _G.TILE_SIZE
+    self.speed = 200
+    self.size = 30
+    self.stage = stage
 end
 
-local function collides(x, y, size)
+function Player:collides(x, y, size)
     local left   = math.floor(x / TILE_SIZE) + 1
     local right  = math.floor((x + size - 1) / TILE_SIZE) + 1
     local top    = math.floor(y / TILE_SIZE) + 1
@@ -18,12 +16,8 @@ local function collides(x, y, size)
 
     for row = top, bottom do
         for col = left, right do
-            local cell = getCell(col, row)
-            if not cell or cell.obstacle then
+            if self.stage:isObstacle(col, row) then
                 return true
-            elseif cell.passable and not cell.obstacle then
-                -- collect
-                return false
             end
         end
     end
@@ -31,25 +25,16 @@ local function collides(x, y, size)
     return false
 end
 
-local Player = Object:extend()
-
-function Player:new()
-    self.x = _G.TILE_SIZE
-    self.y = _G.TILE_SIZE
-    self.speed = 200
-    self.size = 30
-end
-
 function Player:move(dx, dy, dt)
     local newX = self.x + dx * self.speed * dt
 
-    if not collides(newX, self.y, self.size) then
+    if not self:collides(newX, self.y, self.size) then
         self.x = newX
     end
 
     local newY = self.y + dy * self.speed * dt
 
-    if not collides(self.x, newY, self.size) then
+    if not self:collides(self.x, newY, self.size) then
         self.y = newY
     end
 end

@@ -16,6 +16,9 @@ function GameTimer:new(limit)
     )
 end
 
+function GameTimer:update()
+end
+
 function GameTimer:draw()
     love.graphics.setFont(FONT)
     love.graphics.print(string.format("%d", math.ceil(self.timeLeft)), 10, 10)
