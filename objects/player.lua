@@ -8,8 +8,8 @@ function Player:new(stage, visionRadius)
     self.stage = stage
     self.visionRadius = visionRadius
 
+    self.isInvincible = false
     self.memoriesCollected = 0
-    self.score = 0
 end
 
 function Player:collides(x, y, size)
@@ -35,8 +35,10 @@ end
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
 
-    if collectedChar == '.' then
-        self.score = self.score + 10
+    if collectedChar == 'x' then
+        TIMER:during(10, function() self.isInvincible = true end, function() self.isInvincible = false end)
+    elseif collectedChar == '/' then
+        TIMER:during(10, function() self.speed = 600 end, function() self.speed = 200 end)
     elseif collectedChar == 'o' then
         self.memoriesCollected = self.memoriesCollected + 1
         self.visionRadius:alter(self.visionRadius.radius + 100)

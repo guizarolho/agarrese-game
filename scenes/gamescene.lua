@@ -5,7 +5,6 @@ function GameScene:new()
     self.visionRadius = VisionRadius()
     self.player = Player(self.stage, self.visionRadius)
     self.gameTimer = GameTimer(TIME_LIMIT)
-
     self.gameOver = false
 end
 
