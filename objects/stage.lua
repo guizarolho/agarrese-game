@@ -41,16 +41,16 @@ function Stage:new()
 end
 
 function Stage:buildGrid()
-    for row, rowStr in ipairs(self.grid) do
-        self.cells[row] = {}
+    for rowIndex, rowMap in ipairs(self.grid) do
+        self.cells[rowIndex] = {}
 
-        for col = 1, #rowStr do
-            local char = rowStr:sub(col, col)
+        for colIndex = 1, #rowMap do
+            local char = rowMap:sub(colIndex, colIndex)
 
             local isObstacle = char == '#'
             local isCollectable = char == '.' or char == 'o'
 
-            self.cells[row][col] = CellData(
+            self.cells[rowIndex][colIndex] = CellData(
                 isObstacle,
                 isCollectable,
                 char
