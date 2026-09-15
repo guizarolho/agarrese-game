@@ -5,7 +5,7 @@ function GameTimer:new(limit)
     self.timeLeft = self.limit
     self.gameOver = false
 
-    Timer:during(self.limit,
+    TIMER:during(self.limit,
         function(dt, left)
             self.timeLeft = left
         end,
