@@ -5,6 +5,7 @@ function GameTimer:new(limit)
     self.timeLeft = self.limit
     self.gameOver = false
 
+    -- Delay / During / After
     TIMER:during(self.limit,
         function(dt, left)
             self.timeLeft = left
