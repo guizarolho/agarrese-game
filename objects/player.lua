@@ -22,8 +22,8 @@ local function collides(x, y, size)
             if not cell or cell.obstacle then
                 return true
             elseif cell.passable and not cell.obstacle then
+                -- collect
                 return false
-                -- collect 
             end
         end
     end

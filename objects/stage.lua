@@ -40,6 +40,17 @@ function Stage:new()
     self:buildGrid()
 end
 
+function Stage:collect(col, row)
+    local cell = self.cells[row][col]
+
+    if cell and cell.collectable then
+        cell.collectable = false
+        return true
+    end
+
+    return false
+end
+
 function Stage:buildGrid()
     for row, rowStr in ipairs(self.grid) do
         self.cells[row] = {}
