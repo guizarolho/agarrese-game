@@ -10,16 +10,6 @@ local function getCell(col, row)
     return Stage.cells[row][col]
 end
 
-local function isObstacle(col, row)
-    local cell = getCell(col, row)
-
-    if not cell then
-        return true
-    end
-
-    return cell.obstacle
-end
-
 local function collides(x, y, size)
     local left   = math.floor(x / TILE_SIZE) + 1
     local right  = math.floor((x + size - 1) / TILE_SIZE) + 1
@@ -28,8 +18,12 @@ local function collides(x, y, size)
 
     for row = top, bottom do
         for col = left, right do
-            if isObstacle(col, row) then
+            local cell = getCell(col, row)
+            if not cell or cell.obstacle then
                 return true
+            elseif cell.passable and not cell.obstacle then
+                return false
+                -- collect 
             end
         end
     end
