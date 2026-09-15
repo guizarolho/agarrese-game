@@ -1,6 +1,7 @@
 Stage = Object:extend()
 
 function Stage:new()
+    -- TILE = love.graphics.newImage('')
     self.grid = {
         '############################',
         '#............##............#',

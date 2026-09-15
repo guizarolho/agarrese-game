@@ -42,6 +42,7 @@ function Player:new()
     self.speed = 200
     self.size = 30
     self.dir = { x = 0, y = 0 }
+    -- PLAYER_SPRITE = love.graphics.newImage('')
 end
 
 function Player:update(dt)

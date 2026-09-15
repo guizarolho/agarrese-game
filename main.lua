@@ -10,8 +10,6 @@ function love.load()
     WINDOW_WIDTH = 1080
     TILE_SIZE = 32
     FONT = love.graphics.newFont(18)
-    -- TILE = love.graphics.newImage('')
-    -- PLAYER_SPRITE = love.graphics.newImage('')
 end
 
 function love.update(dt)
