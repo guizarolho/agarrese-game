@@ -3,11 +3,14 @@ function love.load()
     WindowHeight = 1920
     TileSize = 32
     Player = {
-        x = 40,
-        y = 40,
+        x = 32,
+        y = 32,
         speed = 200,
-        size = 20
+        size = 30
     }
+
+    -- TILE = love.graphics.newImage('')
+    -- PLAYER_SPRITE = love.graphics.newImage('')
 end
 
 -- https://github.com/Przemekkkth/love-pacman/
@@ -22,9 +25,9 @@ MapGrid = {
     '#.####.##.###  ###.##.####.#',
     '#......##....##....##......#',
     '######.#####.##.#####.######',
-    '     #.##### ## #####.#    #',
-    '     #.##          ##.#    #',
-    '     #.## ######## ##.#    #',
+    '#    #.##### ## #####.#    #',
+    '#    #.##          ##.#    #',
+    '#    #.## ######## ##.#    #',
     '######.## #      # ##.######',
     '      .   #      #   .      ',
     '######.## #      # ##.######',
