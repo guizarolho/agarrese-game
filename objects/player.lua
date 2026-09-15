@@ -31,11 +31,11 @@ local function collides(x, y, size)
     return false
 end
 
-local Player = Object:extend()
+Player = Object:extend()
 
 function Player:new()
-    self.x = 32
-    self.y = 32
+    self.x = _G.TILE_SIZE
+    self.y = _G.TILE_SIZE
     self.speed = 200
     self.size = 30
 end

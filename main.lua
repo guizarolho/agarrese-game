@@ -3,6 +3,7 @@ function love.load()
     Timer = require "lib/timer"
 
     Player = require "objects/player"
+    Enemy = require "objects/enemy"
     Stage = require "objects/stage"
     CellData = require "objects/celldata"
     GameTimer = require "objects/gametimer"
@@ -17,6 +18,7 @@ function love.load()
 
     Stage:new()
     Player:new()
+    -- Enemy:new()
     GameTimer:new(TIME_LIMIT)
 end
 
@@ -32,4 +34,5 @@ function love.draw()
     Stage:draw()
     Player:draw()
     GameTimer:draw()
+    -- Enemy:draw()
 end
