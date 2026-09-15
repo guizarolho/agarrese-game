@@ -2,9 +2,12 @@ function love.load()
     -- Import Libs
     Object = require "lib/classic"
     Timer = require "lib/timer"
+    Bump = require "lib/bump"
+    Binocles = require "lib/binocles"
 
     -- Import Objects
     Player = require "objects/player"
+    VisionRadius = require "objects/visionradius"
     Enemy = require "objects/enemy"
     Stage = require "objects/stage"
     CellData = require "objects/celldata"
