@@ -6,9 +6,13 @@ function Player:new(stage)
     self.speed = 200
     self.size = 30
     self.stage = stage
+
+    self.memoriesCollected = 0
+    self.score = 0
 end
 
 function Player:collides(x, y, size)
+    local hitObstacle = false
     local left   = math.floor(x / TILE_SIZE) + 1
     local right  = math.floor((x + size - 1) / TILE_SIZE) + 1
     local top    = math.floor(y / TILE_SIZE) + 1
@@ -17,12 +21,24 @@ function Player:collides(x, y, size)
     for row = top, bottom do
         for col = left, right do
             if self.stage:isObstacle(col, row) then
-                return true
+                hitObstacle = true
+            elseif self.stage:isCollectable(col, row) then
+                self:collect(col, row)
             end
         end
     end
 
-    return false
+    return hitObstacle
+end
+
+function Player:collect(col, row)
+    local collectedChar = self.stage:collect(col, row)
+
+    if collectedChar == '.' then
+        self.score = self.score + 10
+    elseif collectedChar == 'o' then
+        self.memoriesCollected = self.memoriesCollected + 1
+    end
 end
 
 function Player:move(dx, dy, dt)

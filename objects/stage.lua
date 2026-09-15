@@ -40,17 +40,6 @@ function Stage:new()
     self:buildGrid()
 end
 
-function Stage:collect(col, row)
-    local cell = self.cells[row][col]
-
-    if cell and cell.collectable then
-        cell.collectable = false
-        return true
-    end
-
-    return false
-end
-
 function Stage:buildGrid()
     for row, rowStr in ipairs(self.grid) do
         self.cells[row] = {}
@@ -63,15 +52,11 @@ function Stage:buildGrid()
 
             self.cells[row][col] = CellData(
                 isObstacle,
-                isCollectable
+                isCollectable,
+                char
             )
         end
     end
-end
-
-function Stage:isObstacle(col, row)
-    local cell = self:getCell(col, row)
-    return not cell or cell.obstacle
 end
 
 function Stage:getCell(col, row)
@@ -80,42 +65,45 @@ function Stage:getCell(col, row)
     return self.cells[row][col]
 end
 
-function Stage:draw()
-    for row, rowStr in ipairs(self.grid) do
-        for col = 1, #rowStr do
+function Stage:isObstacle(col, row)
+    local cell = self:getCell(col, row)
+    return not cell or cell.obstacle
+end
 
-            local char = rowStr:sub(col, col)
+function Stage:isCollectable(col, row)
+    local cell = self:getCell(col, row)
+    return cell ~= nil and cell.collectable
+end
+
+function Stage:collect(col, row)
+    local cell = self:getCell(col, row)
+
+    if cell and cell.collectable then
+        cell.collectable = false
+        return cell.char
+    end
+
+    return nil
+end
+
+function Stage:draw()
+    for row, rowCells in ipairs(self.cells) do
+        for col, cell in ipairs(rowCells) do
 
             local px = (col - 1) * TILE_SIZE
             local py = (row - 1) * TILE_SIZE
 
-            if char == '#' then
+            if cell.obstacle then
                 love.graphics.setColor(0.3, 0.3, 0.3)
-                love.graphics.rectangle(
-                    "fill",
-                    px,
-                    py,
-                    TILE_SIZE,
-                    TILE_SIZE
-                )
+                love.graphics.rectangle("fill", px, py, TILE_SIZE, TILE_SIZE)
 
-            elseif char == 'o' then
+            elseif cell.collectable and cell.char == 'o' then
                 love.graphics.setColor(1, 1, 0.4)
-                love.graphics.circle(
-                    "fill",
-                    px + TILE_SIZE / 2,
-                    py + TILE_SIZE / 2,
-                    TILE_SIZE / 3
-                )
+                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 3)
 
-            elseif char == '.' then
+            elseif cell.collectable and cell.char == '.' then
                 love.graphics.setColor(1, 1, 1)
-                love.graphics.circle(
-                    "fill",
-                    px + TILE_SIZE / 2,
-                    py + TILE_SIZE / 2,
-                    TILE_SIZE / 6
-                )
+                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 6)
             end
         end
     end
