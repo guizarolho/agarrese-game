@@ -1,11 +1,14 @@
 local Player = Object:extend()
 
 function Player:new(stage, visionRadius, gameTimer, world)
-    self.x = _G.TILE_SIZE
-    self.y = _G.TILE_SIZE
+    local spawn = stage.playerSpawn
+
+    self.x = (spawn.col - 1) * _G.TILE_SIZE
+    self.y = (spawn.row - 1) * _G.TILE_SIZE
+    
     self.speed = _G.PLAYER_SPEED
-    self.spriteSize = TILE_SIZE
-    self.size = TILE_SIZE - 4
+    self.spriteSize = _G.TILE_SIZE
+    self.size = _G.TILE_SIZE - 3
     self.stage = stage
     self.world = world
     self.visionRadius = visionRadius
