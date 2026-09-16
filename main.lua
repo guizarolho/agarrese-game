@@ -24,7 +24,7 @@ function love.load()
     SceneEnum = require "enum/sceneenum"
         
     -- Global Variables
-    TILE_SIZE = 32
+    TILE_SIZE = 64
     TIME_LIMIT = 60
     TIMER = Timer()
     FONT = love.graphics.newFont(18)
