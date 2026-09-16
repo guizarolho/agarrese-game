@@ -37,6 +37,7 @@ function VisionRadius:draw()
         _G.WINDOW_WIDTH,
         _G.WINDOW_HEIGHT
     )
+    love.graphics.setStencilTest()
 end
 
 return VisionRadius
