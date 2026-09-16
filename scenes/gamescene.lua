@@ -18,7 +18,7 @@ function GameScene:new()
         self.world
     )
 
-    self.gameTimer = GameTimer(10)
+    self.gameTimer = GameTimer(TIME_LIMIT)
 end
 
 function GameScene:update(dt)
