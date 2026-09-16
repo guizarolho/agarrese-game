@@ -1,7 +1,7 @@
 Credits = Object:extend()
 
 function Credits:new()
-    -- Add background image
+    -- self.image = path
     love.graphics.setFont(FONT)
 end
 
@@ -13,6 +13,7 @@ function Credits:keypressed(key)
 end
 
 function Credits:draw()
+    -- love.graphics.newImage(self.image)
     love.graphics.print(
         "Thank you for playing!",
         50,

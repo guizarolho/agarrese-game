@@ -25,6 +25,7 @@ function Player:new(stage, visionRadius, world)
     -- Load Sprite
     -- Load Collect Audio
     -- Load Audio On-hit 
+    -- anim8.newAnimation( self.grid('4-6', 1), 0.2) Column / Row / Frame
 end
 
 function Player:checkCollectable()

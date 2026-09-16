@@ -1,7 +1,7 @@
 Menu = Object:extend()
 
 function Menu:new()
-    -- Add background image
+    -- self.image = 'path'
     love.graphics.setFont(FONT)
 end
 
@@ -13,6 +13,7 @@ function Menu:keypressed(key)
 end
 
 function Menu:draw()
+    -- Add background image love.graphics.newImage(.png)
     love.graphics.print(
         "Press any key to start",
         50,
