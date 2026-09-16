@@ -75,6 +75,7 @@ function GameScene:nextStage()
     self.player.stage = self.stage
     self.player.world = self.world
 
+    -- Spawn
     self.player.x = TILE_SIZE
     self.player.y = TILE_SIZE
 

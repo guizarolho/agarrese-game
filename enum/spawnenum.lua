@@ -3,3 +3,4 @@ local SpawnEnum = {
     PortalSpawn = 'y',
     EnemySpawn = 'i'
 }
+return SpawnEnum

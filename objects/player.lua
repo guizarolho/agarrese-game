@@ -26,7 +26,9 @@ function Player:new(stage, visionRadius, gameTimer, world)
     -- Load Sprite
     -- Load Collect Audio
     -- Load Audio On-hit 
-    -- anim8.newAnimation( self.grid('4-6', 1), 0.2) Column / Row / Frame
+
+    -- Column / Row / Frame
+    -- anim8.newAnimation(self.grid('4-6', 1), 0.2) 
 end
 
 function Player:checkCollectable()
@@ -40,7 +42,6 @@ function Player:checkCollectable()
         self:collect(col, row)
     end
 end
-
 
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
