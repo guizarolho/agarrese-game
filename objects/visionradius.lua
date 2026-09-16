@@ -2,7 +2,11 @@
 VisionRadius = Object:extend()
 
 function VisionRadius:new()
-    self.radius = 300
+    self:reset()
+end
+
+function VisionRadius:reset()
+    self.radius = 150
 end
 
 function VisionRadius:alter(factor)

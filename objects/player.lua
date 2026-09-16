@@ -45,7 +45,7 @@ function Player:collect(col, row)
         TIMER:during(10, function() self.speed = 600 end, function() self.speed = 200 end)
     elseif collectedChar == 'f' then
         self.memoriesCollected = self.memoriesCollected + 1
-        self.visionRadius:alter(self.visionRadius.radius + 100)
+        self.visionRadius:alter(self.visionRadius.radius + 50)
     end
 end
 

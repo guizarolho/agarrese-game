@@ -36,7 +36,6 @@ function GameScene:update(dt)
     if self.paused then
         return
     end
-
     self.gameTimer:update(dt)
 
     if not self.gameTimer.gameOver then
@@ -65,11 +64,11 @@ function GameScene:nextStage()
     end
 
     self.world = Bump.newWorld(TILE_SIZE)
-
     self.stage = Stage(
         StageEnum[self.stageIndex],
         self.world
     )
+    self.visionRadius:reset()
 
     self.player.stage = self.stage
     self.player.world = self.world

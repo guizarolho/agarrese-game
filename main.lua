@@ -19,13 +19,13 @@ function love.load()
     Menu = require "scenes/menu"
     GameScene = require "scenes/gamescene"    
     Credits = require "scenes/credits"
-    
+
     -- Import Enums
     StageEnum = require "enum/stageenum"
     SceneEnum = require "enum/sceneenum"
-        
+
     -- Global Variables
-    TILE_SIZE = 16
+    TILE_SIZE = 32
     TIME_LIMIT = 999
     TIMER = Timer()
     FONT = love.graphics.newFont(18)
