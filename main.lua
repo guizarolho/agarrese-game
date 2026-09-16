@@ -18,14 +18,15 @@ function love.load()
     SceneManager = require "scenes/scenemanager"
     Menu = require "scenes/menu"
     GameScene = require "scenes/gamescene"    
+    Credits = require "scenes/credits"
     
     -- Import Enums
     StageEnum = require "enum/stageenum"
     SceneEnum = require "enum/sceneenum"
         
     -- Global Variables
-    TILE_SIZE = 64
-    TIME_LIMIT = 60
+    TILE_SIZE = 16
+    TIME_LIMIT = 80
     TIMER = Timer()
     FONT = love.graphics.newFont(18)
     GAME_OVER = false
@@ -36,10 +37,12 @@ function love.load()
     -- Config SceneManager
     MENU = Menu()
     GAME = GameScene()
+    CREDITS = Credits()
 
     SceneManager:new()
     SceneManager:addScene(SceneEnum.Menu, MENU)
     SceneManager:addScene(SceneEnum.Game, GAME)
+    SceneManager:addScene(SceneEnum.Credits, CREDITS)
     SceneManager:changeScene(SceneEnum.Menu)
 end
 

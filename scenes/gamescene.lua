@@ -19,7 +19,7 @@ function GameScene:new()
     )
 
     self.paused = false
-    self.gameTimer = GameTimer()
+    self.gameTimer = GameTimer(_G.TIME_LIMIT)
 end
 
 function GameScene:update(dt)
