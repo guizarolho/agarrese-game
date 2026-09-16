@@ -2,27 +2,42 @@ GameScene = Object:extend()
 
 function GameScene:new()
     self.stageIndex = 0
-    self.stage = Stage(StageEnum[self.stageIndex])
+
+    self.world = Bump.newWorld(TILE_SIZE)
+
+    self.stage = Stage(
+        StageEnum[self.stageIndex],
+        self.world
+    )
+
     self.visionRadius = VisionRadius()
-    self.player = Player(self.stage, self.visionRadius)
-    self.gameTimer = GameTimer(TIME_LIMIT)
-    self.gameOver = false
+
+    self.player = Player(
+        self.stage,
+        self.visionRadius,
+        self.world
+    )
+
+    self.gameTimer = GameTimer(10)
 end
 
 function GameScene:update(dt)
-    if not self.gameOver then
+    self.gameTimer:update(dt)
+
+    if not self.gameTimer.gameOver then
         self.player:update(dt)
+
         self.visionRadius:update(
-            -- Center circle to object 
             self.player.x + self.player.size / 2,
             self.player.y + self.player.size / 2
         )
     end
-    if self.stage:isComplete(self.player.memoriesCollected) then
+
+    if not self.gameTimer.gameOver
+        and self.stage:isComplete(self.player.memoriesCollected)
+    then
         self:nextStage()
     end
-
-    self.gameTimer:update(dt)
 end
 
 function GameScene:nextStage()
@@ -33,11 +48,28 @@ function GameScene:nextStage()
         return
     end
 
-    self.stage = Stage(StageEnum[self.stageIndex])
-    self.player.memoriesCollected = 0
+    self.world = Bump.newWorld(TILE_SIZE)
+
+    self.stage = Stage(
+        StageEnum[self.stageIndex],
+        self.world
+    )
+
     self.player.stage = self.stage
-    self.player.x = _G.TILE_SIZE
-    self.player.y = _G.TILE_SIZE
+    self.player.world = self.world
+
+    self.player.x = TILE_SIZE
+    self.player.y = TILE_SIZE
+
+    self.world:add(
+        self.player,
+        self.player.x,
+        self.player.y,
+        self.player.size,
+        self.player.size
+    )
+
+    self.player.memoriesCollected = 0
 end
 
 function GameScene:draw()

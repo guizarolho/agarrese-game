@@ -1,37 +1,40 @@
 local Player = Object:extend()
 
-function Player:new(stage, visionRadius)
+function Player:new(stage, visionRadius, world)
     self.x = _G.TILE_SIZE
     self.y = _G.TILE_SIZE
     self.speed = 200
-    self.size = 30
+    self.spriteSize = TILE_SIZE
+    self.size = TILE_SIZE - 3
     self.stage = stage
+    self.world = world
     self.visionRadius = visionRadius
     self.hitPoints = 3
 
     self.isInvincible = false
     self.memoriesCollected = 0
+
+    self.world:add(
+        self,
+        self.x,
+        self.y,
+        self.size,
+        self.size
+    )
 end
 
-function Player:collides(x, y, size)
-    local hitObstacle = false
-    local left   = math.floor(x / TILE_SIZE) + 1
-    local right  = math.floor((x + size - 1) / TILE_SIZE) + 1
-    local top    = math.floor(y / TILE_SIZE) + 1
-    local bottom = math.floor((y + size - 1) / TILE_SIZE) + 1
+function Player:checkCollectable()
+    local centerX = self.x + self.size / 2
+    local centerY = self.y + self.size / 2
 
-    for row = top, bottom do
-        for col = left, right do
-            if self.stage:isObstacle(col, row) then
-                hitObstacle = true
-            elseif self.stage:isCollectable(col, row) then
-                self:collect(col, row)
-            end
-        end
+    local col = math.floor(centerX / TILE_SIZE) + 1
+    local row = math.floor(centerY / TILE_SIZE) + 1
+
+    if self.stage:isCollectable(col, row) then
+        self:collect(col, row)
     end
-
-    return hitObstacle
 end
+
 
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
@@ -47,17 +50,17 @@ function Player:collect(col, row)
 end
 
 function Player:move(dx, dy, dt)
-    local newX = self.x + dx * self.speed * dt
+    local goalX = self.x + dx * self.speed * dt
+    local goalY = self.y + dy * self.speed * dt
 
-    if not self:collides(newX, self.y, self.size) then
-        self.x = newX
-    end
+    local x, y = self.world:move(
+        self,
+        goalX,
+        goalY
+    )
 
-    local newY = self.y + dy * self.speed * dt
-
-    if not self:collides(self.x, newY, self.size) then
-        self.y = newY
-    end
+    self.x = x
+    self.y = y
 end
 
 function Player:update(dt)
@@ -80,16 +83,17 @@ function Player:update(dt)
     end
 
     self:move(dx, dy, dt)
+    self:checkCollectable()
 end
 
 function Player:draw()
     love.graphics.setColor(1, 1, 1)
     love.graphics.rectangle(
         "fill",
-        self.x,
-        self.y,
-        self.size,
-        self.size
+        self.x - (self.spriteSize - self.size) / 2,
+        self.y - (self.spriteSize - self.size) / 2,
+        self.spriteSize,
+        self.spriteSize
     )
 end
 

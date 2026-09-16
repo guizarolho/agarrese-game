@@ -27,7 +27,6 @@ function VisionRadius:draw()
         "replace",
         1
     )
-
     love.graphics.setStencilTest("notequal", 1)
     love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle(
@@ -38,6 +37,7 @@ function VisionRadius:draw()
         _G.WINDOW_HEIGHT
     )
     love.graphics.setStencilTest()
+    love.graphics.setColor(1, 1, 1, 1)
 end
 
 return VisionRadius

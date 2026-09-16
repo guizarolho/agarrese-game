@@ -1,9 +1,12 @@
 local Stage = Object:extend()
 
-function Stage:new(stageMap)
+function Stage:new(stageMap, world)
     self.grid = stageMap
+    self.world = world
+
     self.totalMemories = 0
     self.cells = {}
+    self.obstacles = {}
 
     self:buildGrid()
 end
@@ -27,6 +30,22 @@ function Stage:buildGrid()
                 isCollectable,
                 char
             )
+            if isObstacle then
+                local obstacle = {}
+
+                local x = (colIndex - 1) * TILE_SIZE
+                local y = (rowIndex - 1) * TILE_SIZE
+
+                self.world:add(
+                    obstacle,
+                    x,
+                    y,
+                    TILE_SIZE,
+                    TILE_SIZE
+                )
+
+                table.insert(self.obstacles, obstacle)
+            end
         end
     end
 end

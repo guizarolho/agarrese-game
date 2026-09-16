@@ -3,7 +3,8 @@ function love.load()
     Object = require "lib/classic"
     Timer = require "lib/timer"
     Binocles = require "lib/binocles"
-    TEsound = require "lib/tesound"    
+    Bump = require "lib/bump"
+    TEsound = require "lib/tesound"
 
     -- Import Objects
     Player = require "objects/player"
@@ -30,6 +31,7 @@ function love.load()
     GAME_OVER = false
     WINDOW_WIDTH = 1920
     WINDOW_HEIGHT = 1080
+    WORLD = Bump.newWorld(TILE_SIZE)
 
     -- Config SceneManager
     MENU = Menu()
