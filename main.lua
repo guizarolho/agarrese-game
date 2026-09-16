@@ -29,6 +29,7 @@ function love.load()
     TILE_SIZE = 32
     TIME_LIMIT = 999
     TIMER = Timer()
+    GAME_TIMER = Timer()
     FONT = love.graphics.newFont(18)
     GAME_OVER = false
     PLAYER_SPEED = 200
@@ -60,6 +61,11 @@ end
 
 function love.update(dt)
     TIMER:update(dt)
+
+    if not GAME.paused then
+        GAME_TIMER:update(dt)
+    end
+
     SceneManager:update(dt)
 end
 

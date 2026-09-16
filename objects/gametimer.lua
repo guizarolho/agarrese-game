@@ -5,28 +5,22 @@ function GameTimer:new(limit)
     self.limit = limit or 60
     self.timeLeft = self.limit
     self.gameOver = false
-    self.paused = false
+
+    GAME_TIMER:during(
+        self.limit,
+
+        function(dt, left)
+            self.timeLeft = left
+        end,
+
+        function()
+            self.gameOver = true
+            self.timeLeft = 0
+        end
+    )
 end
 
 function GameTimer:update(dt)
-    if self.paused or self.gameOver then
-        return
-    end
-
-    self.timeLeft = self.timeLeft - dt
-
-    if self.timeLeft <= 0 then
-        self.timeLeft = 0
-        self.gameOver = true
-    end
-end
-
-function GameTimer:pause()
-    self.paused = true
-end
-
-function GameTimer:resume()
-    self.paused = false
 end
 
 function GameTimer:draw()

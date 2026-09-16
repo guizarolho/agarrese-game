@@ -51,11 +51,11 @@ function Player:collect(col, row)
 
         self.visionRadius:alter(originalRadius + _G.VISION_BUFF_FACTOR)
 
-        TIMER:after(_G.VISION_BUFF_TIMER, function() self.visionRadius:alter(originalRadius) end)
+        GAME_TIMER:after(_G.VISION_BUFF_TIMER, function() self.visionRadius:alter(originalRadius) end)
     elseif collectedChar == ItemsEnum.Speed then
-        TIMER:during(_G.SPEED_BUFF_TIMER, function() self.speed = _G.SPEED_BUFF_FACTOR end, function() self.speed = _G.PLAYER_SPEED end)
+        GAME_TIMER:during(_G.SPEED_BUFF_TIMER, function() self.speed = _G.SPEED_BUFF_FACTOR end, function() self.speed = _G.PLAYER_SPEED end)
     elseif collectedChar == ItemsEnum.Invincible then
-        TIMER:during(_G.INVENCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
+        GAME_TIMER:during(_G.INVENCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
     elseif collectedChar == ItemsEnum.Fragment then
         self.memoriesCollected = self.memoriesCollected + 1
         self.visionRadius:alter(self.visionRadius.radius + 50)
@@ -101,6 +101,10 @@ end
 
 function Player:draw()
     love.graphics.setColor(1, 1, 1)
+    if self.isInvincible then
+        love.graphics.setColor(1, 0, 0)
+    end
+
     love.graphics.rectangle(
         "fill",
         self.x - (self.spriteSize - self.size) / 2,
@@ -108,6 +112,7 @@ function Player:draw()
         self.spriteSize,
         self.spriteSize
     )
+    love.graphics.setColor(1, 1, 1)
 end
 
 return Player

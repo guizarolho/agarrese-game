@@ -98,12 +98,6 @@ end
 function GameScene:keypressed(key)
     if key == 'p' then
         self.paused = not self.paused
-
-        if self.paused then
-            self.gameTimer:pause()
-        else
-            self.gameTimer:resume()
-        end
     end
 end
 

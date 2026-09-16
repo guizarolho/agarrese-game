@@ -8,6 +8,8 @@ function Stage:new(stageMap, world)
     self.cells = {}
     self.obstacles = {}
 
+    self.exitHidden = true
+
     self:buildGrid()
 end
 
@@ -18,7 +20,7 @@ function Stage:buildGrid()
         for colIndex = 1, #rowMap do
             local char = rowMap:sub(colIndex, colIndex)
 
-            if char == 'f' then
+            if char == ItemsEnum.Fragment then
                 self.totalMemories = self.totalMemories + 1
             end
 
@@ -57,6 +59,10 @@ function Stage:buildGrid()
     end
 end
 
+function Stage:showPortal()
+
+end
+
 function Stage:getCell(col, row)
     if row < 1 or row > #self.cells then return nil end
     if col < 1 or col > #self.cells[row] then return nil end
@@ -74,7 +80,12 @@ function Stage:isCollectable(col, row)
 end
 
 function Stage:isComplete(memoriesCollected)
-    return memoriesCollected >= self.totalMemories
+    local isCompleted = memoriesCollected >= self.totalMemories 
+    if isCompleted then
+        self.exitHidden = false
+    end
+
+    return  isCompleted
 end
 
 function Stage:collect(col, row)
