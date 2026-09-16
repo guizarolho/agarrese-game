@@ -5,10 +5,10 @@ function Player:new(stage, visionRadius, gameTimer, world)
 
     self.x = (spawn.col - 1) * _G.TILE_SIZE
     self.y = (spawn.row - 1) * _G.TILE_SIZE
-    
     self.speed = _G.PLAYER_SPEED
     self.spriteSize = _G.TILE_SIZE
     self.size = _G.TILE_SIZE - 3
+
     self.stage = stage
     self.world = world
     self.visionRadius = visionRadius
@@ -25,6 +25,8 @@ function Player:new(stage, visionRadius, gameTimer, world)
         self.size,
         self.size
     )
+    self.image = love.graphics.newImage("sprites/joaquim.png")
+    self.image:setFilter("nearest", "nearest")
 
     -- Load Sprite
     -- Load Collect Audio
@@ -108,17 +110,21 @@ function Player:update(dt)
 end
 
 function Player:draw()
-    love.graphics.setColor(1, 1, 1)
+    love.graphics.setColor(1, 1, 1, 1)
     if self.isInvincible then
         love.graphics.setColor(1, 0, 0)
     end
 
-    love.graphics.rectangle(
-        "fill",
+    local scaleX = self.spriteSize / self.image:getWidth()
+    local scaleY = self.spriteSize / self.image:getHeight()
+
+    love.graphics.draw(
+        self.image,
         self.x - (self.spriteSize - self.size) / 2,
         self.y - (self.spriteSize - self.size) / 2,
-        self.spriteSize,
-        self.spriteSize
+        0,
+        scaleX,
+        scaleY
     )
     love.graphics.setColor(1, 1, 1)
 end

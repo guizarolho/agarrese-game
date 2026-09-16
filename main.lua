@@ -5,6 +5,7 @@ function love.load()
     Binocles = require "lib/binocles"
     Bump = require "lib/bump"
     TEsound = require "lib/tesound"
+    -- Jumper = require "lib/jumper"
 
     -- Import Objects
     Player = require "objects/player"
