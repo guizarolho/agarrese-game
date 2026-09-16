@@ -18,12 +18,12 @@ function Stage:buildGrid()
         for colIndex = 1, #rowMap do
             local char = rowMap:sub(colIndex, colIndex)
 
-            if char == 'o' then
+            if char == 'f' then
                 self.totalMemories = self.totalMemories + 1
             end
 
             local isObstacle = char == '#'
-            local isCollectable = char == '.' or char == 'o'
+            local isCollectable = char == '.' or char == 'f'
 
             self.cells[rowIndex][colIndex] = CellData(
                 isObstacle,
@@ -92,7 +92,7 @@ function Stage:draw()
                 love.graphics.setColor(0.3, 0.3, 0.3)
                 love.graphics.rectangle("fill", px, py, TILE_SIZE, TILE_SIZE)
 
-            elseif cell.collectable and cell.char == 'o' then
+            elseif cell.collectable and cell.char == 'f' then
                 love.graphics.setColor(1, 1, 0.4)
                 love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 3)
 

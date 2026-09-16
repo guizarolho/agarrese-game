@@ -26,7 +26,7 @@ function love.load()
         
     -- Global Variables
     TILE_SIZE = 16
-    TIME_LIMIT = 80
+    TIME_LIMIT = 999
     TIMER = Timer()
     FONT = love.graphics.newFont(18)
     GAME_OVER = false

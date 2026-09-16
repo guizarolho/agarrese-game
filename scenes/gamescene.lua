@@ -1,7 +1,18 @@
 GameScene = Object:extend()
 
 function GameScene:new()
+    self:reset()
+end
+
+function GameScene:enter()
+    self:reset()
+end
+
+
+function GameScene:reset()
     self.stageIndex = 0
+    self.paused = false
+    self.gameOver = false
 
     self.world = Bump.newWorld(TILE_SIZE)
 
@@ -18,7 +29,6 @@ function GameScene:new()
         self.world
     )
 
-    self.paused = false
     self.gameTimer = GameTimer(_G.TIME_LIMIT)
 end
 
@@ -50,6 +60,7 @@ function GameScene:nextStage()
 
     if not StageEnum[self.stageIndex] then
         self.gameOver = true
+        SceneManager:changeScene(SceneEnum.Credits)
         return
     end
 
