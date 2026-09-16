@@ -23,13 +23,14 @@ function GameScene:reset()
 
     self.visionRadius = VisionRadius()
 
+    self.gameTimer = GameTimer(_G.TIME_LIMIT)
     self.player = Player(
         self.stage,
         self.visionRadius,
+        self.gameTimer,
         self.world
     )
 
-    self.gameTimer = GameTimer(_G.TIME_LIMIT)
     -- TESound:play(soundtrack)
 end
 

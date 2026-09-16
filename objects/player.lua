@@ -1,6 +1,6 @@
 local Player = Object:extend()
 
-function Player:new(stage, visionRadius, world)
+function Player:new(stage, visionRadius, gameTimer, world)
     self.x = _G.TILE_SIZE
     self.y = _G.TILE_SIZE
     self.speed = _G.PLAYER_SPEED
@@ -13,6 +13,7 @@ function Player:new(stage, visionRadius, world)
 
     self.isInvincible = false
     self.memoriesCollected = 0
+    self.gameTimer = gameTimer
 
     self.world:add(
         self,
@@ -58,6 +59,7 @@ function Player:collect(col, row)
         GAME_TIMER:during(_G.INVENCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
     elseif collectedChar == ItemsEnum.Fragment then
         self.memoriesCollected = self.memoriesCollected + 1
+        self.gameTimer:addTime(_G.GAME_TIMER_BUFF)
         self.visionRadius:alter(self.visionRadius.radius + 50)
     end
 end
