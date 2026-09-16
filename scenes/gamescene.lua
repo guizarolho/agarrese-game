@@ -34,9 +34,10 @@ function GameScene:nextStage()
     end
 
     self.stage = Stage(StageEnum[self.stageIndex])
-    self.player.stage = self.stage
     self.player.memoriesCollected = 0
-    self.player.x, self.player.y = TILE_SIZE, TILE_SIZE
+    self.player.stage = self.stage
+    self.player.x = _G.TILE_SIZE
+    self.player.y = _G.TILE_SIZE
 end
 
 function GameScene:draw()
