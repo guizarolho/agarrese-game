@@ -3,9 +3,9 @@ local Player = Object:extend()
 function Player:new(stage, visionRadius, world)
     self.x = _G.TILE_SIZE
     self.y = _G.TILE_SIZE
-    self.speed = 200
+    self.speed = _G.PLAYER_SPEED
     self.spriteSize = TILE_SIZE
-    self.size = TILE_SIZE - 3
+    self.size = TILE_SIZE - 4
     self.stage = stage
     self.world = world
     self.visionRadius = visionRadius
@@ -21,6 +21,10 @@ function Player:new(stage, visionRadius, world)
         self.size,
         self.size
     )
+
+    -- Load Sprite
+    -- Load Collect Audio
+    -- Load Audio On-hit 
 end
 
 function Player:checkCollectable()
@@ -38,12 +42,20 @@ end
 
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
-    -- TEsound.play()
+    -- TEsound.play(collectEffect)
     if collectedChar == 'x' then
-        TIMER:during(10, function() self.isInvincible = true end, function() self.isInvincible = false end)
-    elseif collectedChar == '/' then
-        TIMER:during(10, function() self.speed = 600 end, function() self.speed = 200 end)
-    elseif collectedChar == 'f' then
+    elseif collectedChar == 'y' then
+    elseif collectedChar == ItemsEnum.Vision then
+        local originalRadius = self.visionRadius.radius
+
+        self.visionRadius:alter(originalRadius + _G.VISION_BUFF_FACTOR)
+
+        TIMER:after(_G.VISION_BUFF_TIMER, function() self.visionRadius:alter(originalRadius) end)
+    elseif collectedChar == ItemsEnum.Speed then
+        TIMER:during(_G.SPEED_BUFF_TIMER, function() self.speed = _G.SPEED_BUFF_FACTOR end, function() self.speed = _G.PLAYER_SPEED end)
+    elseif collectedChar == ItemsEnum.Invincible then
+        TIMER:during(_G.INVENCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
+    elseif collectedChar == ItemsEnum.Fragment then
         self.memoriesCollected = self.memoriesCollected + 1
         self.visionRadius:alter(self.visionRadius.radius + 50)
     end

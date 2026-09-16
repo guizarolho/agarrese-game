@@ -23,7 +23,14 @@ function Stage:buildGrid()
             end
 
             local isObstacle = char == '#'
-            local isCollectable = char == '.' or char == 'f'
+            local isCollectable = false
+
+            for _, value in pairs(ItemsEnum) do
+                print(value)
+                if char == value then
+                    isCollectable = true
+                end
+            end
 
             self.cells[rowIndex][colIndex] = CellData(
                 isObstacle,
@@ -92,14 +99,22 @@ function Stage:draw()
                 love.graphics.setColor(0.3, 0.3, 0.3)
                 love.graphics.rectangle("fill", px, py, TILE_SIZE, TILE_SIZE)
 
-            elseif cell.collectable and cell.char == 'f' then
+            elseif cell.collectable and cell.char == ItemsEnum.Fragment then
                 love.graphics.setColor(1, 1, 0.4)
                 love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 3)
 
-            elseif cell.collectable and cell.char == '.' then
-                love.graphics.setColor(1, 1, 1)
+            elseif cell.collectable and cell.char == ItemsEnum.Vision then
+                love.graphics.setColor(1, 0, 0)
+                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 6)
+            elseif cell.collectable and cell.char == ItemsEnum.Speed then
+                love.graphics.setColor(0, 1, 0)
+                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 6)
+            elseif cell.collectable and cell.char == ItemsEnum.Invincible then
+                love.graphics.setColor(0, 0, 1)
                 love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 6)
             end
+
+            love.graphics.setColor(1, 1, 1)
         end
     end
 end

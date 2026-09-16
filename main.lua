@@ -23,6 +23,7 @@ function love.load()
     -- Import Enums
     StageEnum = require "enum/stageenum"
     SceneEnum = require "enum/sceneenum"
+    ItemsEnum = require "enum/itemsenum"
 
     -- Global Variables
     TILE_SIZE = 32
@@ -30,9 +31,19 @@ function love.load()
     TIMER = Timer()
     FONT = love.graphics.newFont(18)
     GAME_OVER = false
+    PLAYER_SPEED = 200
     WINDOW_WIDTH = 1920
     WINDOW_HEIGHT = 1080
     WORLD = Bump.newWorld(TILE_SIZE)
+
+    -- Items
+    VISION_BUFF_FACTOR = 50
+    VISION_BUFF_TIMER = 5
+
+    SPEED_BUFF_FACTOR = 300
+    SPEED_BUFF_TIMER = 5
+
+    INVENCIBLE_BUFF_TIMER = 5
 
     -- Config SceneManager
     MENU = Menu()

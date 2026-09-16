@@ -1,6 +1,7 @@
 local GameTimer = Object:extend()
 
 function GameTimer:new(limit)
+    -- Load audio for tick (?)
     self.limit = limit or 60
     self.timeLeft = self.limit
     self.gameOver = false

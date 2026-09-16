@@ -30,6 +30,7 @@ function GameScene:reset()
     )
 
     self.gameTimer = GameTimer(_G.TIME_LIMIT)
+    -- TESound:play(soundtrack)
 end
 
 function GameScene:update(dt)
