@@ -46,9 +46,7 @@ end
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
     -- TEsound.play(collectEffect)
-    if collectedChar == 'x' then
-    elseif collectedChar == 'y' then
-    elseif collectedChar == ItemsEnum.Vision then
+    if collectedChar == ItemsEnum.Vision then
         local originalRadius = self.visionRadius.radius
 
         self.visionRadius:alter(originalRadius + _G.VISION_BUFF_FACTOR)
@@ -61,7 +59,11 @@ function Player:collect(col, row)
     elseif collectedChar == ItemsEnum.Fragment then
         self.memoriesCollected = self.memoriesCollected + 1
         self.gameTimer:addTime(_G.GAME_TIMER_BUFF)
-        self.visionRadius:alter(self.visionRadius.radius + 50)
+        if self.stage:isComplete(self.memoriesCollected) then
+            self.visionRadius:alter(10000000)
+        else
+            self.visionRadius:alter(self.visionRadius.radius + 50)
+        end
     end
 end
 

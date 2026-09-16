@@ -35,7 +35,7 @@ function GameScene:reset()
 end
 
 function GameScene:update(dt)
-    if self.paused then
+   if self.paused then
         return
     end
     self.gameTimer:update(dt)
@@ -47,13 +47,25 @@ function GameScene:update(dt)
             self.player.x + self.player.size / 2,
             self.player.y + self.player.size / 2
         )
-    end
 
-    if not self.gameTimer.gameOver
-        and self.stage:isComplete(self.player.memoriesCollected)
-    then
-        self:nextStage()
+        self.stage:isComplete(self.player.memoriesCollected)
+        if not self.stage.exitHidden and self:isPlayerOnPortal() then
+            self:nextStage()
+        end
     end
+end
+
+function GameScene:isPlayerOnPortal()
+    local portal = self.stage.portalSpawn
+    if not portal then return false end
+
+    local centerX = self.player.x + self.player.size / 2
+    local centerY = self.player.y + self.player.size / 2
+
+    local col = math.floor(centerX / TILE_SIZE) + 1
+    local row = math.floor(centerY / TILE_SIZE) + 1
+
+    return col == portal.col and row == portal.row
 end
 
 function GameScene:nextStage()
