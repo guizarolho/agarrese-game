@@ -18,10 +18,15 @@ function GameScene:new()
         self.world
     )
 
-    self.gameTimer = GameTimer(TIME_LIMIT)
+    self.paused = false
+    self.gameTimer = GameTimer()
 end
 
 function GameScene:update(dt)
+    if self.paused then
+        return
+    end
+
     self.gameTimer:update(dt)
 
     if not self.gameTimer.gameOver then
@@ -80,6 +85,15 @@ function GameScene:draw()
 end
 
 function GameScene:keypressed(key)
+    if key == 'p' then
+        self.paused = not self.paused
+
+        if self.paused then
+            self.gameTimer:pause()
+        else
+            self.gameTimer:resume()
+        end
+    end
 end
 
 return GameScene
