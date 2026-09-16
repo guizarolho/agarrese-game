@@ -1,40 +1,8 @@
 local Stage = Object:extend()
 
-function Stage:new()
-    self.grid = {
-        '############################',
-        '#............##............#',
-        '#.####.#####.##.#####.####.#',
-        '#o#  #.#   #.##.#   #.#  #o#',
-        '#.####.#####.##.#####.####.#',
-        '#..........................#',
-        '#.####.##.########.##.####.#',
-        '#.####.##.###  ###.##.####.#',
-        '#......##....##....##......#',
-        '######.#####.##.#####.######',
-        '#    #.##### ## #####.#    #',
-        '#    #.##          ##.#    #',
-        '#    #.## ######## ##.#    #',
-        '######.## #      # ##.######',
-        '      .   #      #   .      ',
-        '######.## #      # ##.######',
-        '#    #.## ######## ##.#    #',
-        '#    #.##          ##.#    #',
-        '#    #.##.########.##.#    #',
-        '######.##.###  ###.##.######',
-        '#............##............#',
-        '#.####.#####.##.#####.####.#',
-        '#.####.#####.##.#####.####.#',
-        '#o..##.......  .......##..o#',
-        '###.##.##.########.##.##.###',
-        '###.##.##.###  ###.##.##.###',
-        '#......##....##....##......#',
-        '#.#####  ###.##.###  #####.#',
-        '#.##########.##.##########.#',
-        '#..........................#',
-        '############################'
-    }
-
+function Stage:new(stageMap)
+    self.grid = stageMap
+    self.totalMemories = 0
     self.cells = {}
 
     self:buildGrid()
@@ -46,6 +14,10 @@ function Stage:buildGrid()
 
         for colIndex = 1, #rowMap do
             local char = rowMap:sub(colIndex, colIndex)
+
+            if char == 'o' then
+                self.totalMemories = self.totalMemories + 1
+            end
 
             local isObstacle = char == '#'
             local isCollectable = char == '.' or char == 'o'
@@ -73,6 +45,10 @@ end
 function Stage:isCollectable(col, row)
     local cell = self:getCell(col, row)
     return cell ~= nil and cell.collectable
+end
+
+function Stage:isComplete(memoriesCollected)
+    return memoriesCollected >= self.totalMemories
 end
 
 function Stage:collect(col, row)

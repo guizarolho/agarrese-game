@@ -7,6 +7,7 @@ function Player:new(stage, visionRadius)
     self.size = 30
     self.stage = stage
     self.visionRadius = visionRadius
+    self.hitPoints = 3
 
     self.isInvincible = false
     self.memoriesCollected = 0

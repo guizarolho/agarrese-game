@@ -17,9 +17,12 @@ function love.load()
     -- Import Scene
     SceneManager = require "scenes/scenemanager"
     Menu = require "scenes/menu"
-    GameScene = require "scenes/gamescene"
-    SceneEnum = require "scenes/sceneenum"
+    GameScene = require "scenes/gamescene"    
     
+    -- Import Enums
+    StageEnum = require "enum/stageenum"
+    SceneEnum = require "enum/sceneenum"
+        
     -- Global Variables
     TILE_SIZE = 32
     TIME_LIMIT = 60
