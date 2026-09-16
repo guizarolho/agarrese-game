@@ -57,7 +57,7 @@ function Player:collect(col, row)
     elseif collectedChar == ItemsEnum.Speed then
         GAME_TIMER:during(_G.SPEED_BUFF_TIMER, function() self.speed = _G.SPEED_BUFF_FACTOR end, function() self.speed = _G.PLAYER_SPEED end)
     elseif collectedChar == ItemsEnum.Invincible then
-        GAME_TIMER:during(_G.INVENCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
+        GAME_TIMER:during(_G.INVINCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
     elseif collectedChar == ItemsEnum.Fragment then
         self.memoriesCollected = self.memoriesCollected + 1
         self.gameTimer:addTime(_G.GAME_TIMER_BUFF)

@@ -43,7 +43,7 @@ function love.load()
     VISION_BUFF_TIMER = 5
     SPEED_BUFF_FACTOR = 300
     SPEED_BUFF_TIMER = 5
-    INVENCIBLE_BUFF_TIMER = 5
+    INVINCIBLE_BUFF_TIMER = 5
     GAME_TIMER_BUFF = 20
 
     -- Config SceneManager
