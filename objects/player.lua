@@ -27,6 +27,14 @@ function Player:new(stage, visionRadius, gameTimer, world)
     )
     self.image = love.graphics.newImage("sprites/joaquim_front.png")
     self.image:setFilter("nearest", "nearest")
+
+    -- self.animations = {}
+    -- self.animations.down  = anim8.newAnimation()
+    -- self.animations.left  = anim8.newAnimation()
+    -- self.animations.right = anim8.newAnimation()
+    -- self.animations.up    = anim8.newAnimation()
+    -- self.animations.dead  = anim8.newAnimation()
+    
     -- Load Collect Audio
     -- Load Audio On-hit 
 

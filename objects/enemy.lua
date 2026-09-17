@@ -20,6 +20,7 @@ function Enemy:new(player, stage, index)
     self.pathUpdateTimer = 0
     self.pathUpdateInterval = 0.35
 
+    self.image = love.graphics.newImage("sprites/enemy.png")
     self.spriteSize = _G.TILE_SIZE
     self.size = _G.TILE_SIZE - 3
 end
@@ -154,6 +155,18 @@ function Enemy:draw()
             self.player.y + TILE_SIZE / 2
         )
     end
+
+    local scaleX = self.spriteSize / self.image:getWidth()
+    local scaleY = self.spriteSize / self.image:getHeight()
+
+    love.graphics.draw(
+        self.image,
+        self.x - (self.spriteSize - self.size) / 2,
+        self.y - (self.spriteSize - self.size) / 2,
+        0,
+        scaleX,
+        scaleY
+    )
 
     love.graphics.setColor(1, 1, 1)
 end

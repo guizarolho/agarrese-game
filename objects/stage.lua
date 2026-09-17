@@ -13,7 +13,14 @@ function Stage:new(stageMap, world)
     self.enemySpawns = {}
     self.exitHidden = true
 
+    self:buildGrid()
+    self:buildPathNodes()
+
+    --------------------------------------------------------------------
     -- TILE_ANIMATION
+    --------------------------------------------------------------------
+    
+    -- Portal
     self.portalImage = love.graphics.newImage("sprites/portal.png")
     local portalGrid = Anim8.newGrid(
         _G.TILE_SIZE,
@@ -26,8 +33,23 @@ function Stage:new(stageMap, world)
         0.08
     )
 
-    self:buildGrid()
-    self:buildPathNodes()
+    -- Fragment
+    self.fragmentImage = love.graphics.newImage("sprites/fragment.png")
+    local fragmentGrid = Anim8.newGrid(
+        _G.TILE_SIZE,
+        _G.TILE_SIZE,
+        self.fragmentImage:getWidth(),
+        self.fragmentImage:getHeight()
+    )
+    self.fragmentAnimation = Anim8.newAnimation(
+        fragmentGrid("1-11", 1),
+        0.08
+    )
+
+    -- Item Sprites
+    self.speedImage = love.graphics.newImage("sprites/pill.png")
+    self.visionImage = love.graphics.newImage("sprites/glasses.png")
+    self.invincibleImage = love.graphics.newImage("sprites/ghost.png")
 end
 
 -- Builds path nodes for A*
@@ -120,6 +142,8 @@ function Stage:update(dt)
     if not self.exitHidden then
         self.portalAnimation:update(dt)
     end
+
+    self.fragmentAnimation:update(dt)
 end
 
 -- Helpers
@@ -180,23 +204,35 @@ function Stage:draw()
                 )
             -- Fragment Memories 
             elseif cell.collectable and cell.char == ItemsEnum.Fragment then
-                love.graphics.setColor(1, 1, 0.4)
-                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 3)
+                self.fragmentAnimation:draw(
+                    self.fragmentImage,
+                    px,
+                    py
+                )
 
             -- Vision Buff Collectable
             elseif cell.collectable and cell.char == ItemsEnum.Vision then
-                love.graphics.setColor(1, 0, 0)
-                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 6)
+                love.graphics.draw(
+                    self.visionImage,
+                    px,
+                    py
+                )
 
             -- Speed Buff Collectable
             elseif cell.collectable and cell.char == ItemsEnum.Speed then
-                love.graphics.setColor(0, 1, 0)
-                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 6)
+                love.graphics.draw(
+                    self.speedImage,
+                    px,
+                    py
+                )
 
             -- Invincible Buff Collectable
             elseif cell.collectable and cell.char == ItemsEnum.Invincible then
-                love.graphics.setColor(0, 0, 1)
-                love.graphics.circle("fill", px + TILE_SIZE / 2, py + TILE_SIZE / 2, TILE_SIZE / 6)
+                love.graphics.draw(
+                    self.invincibleImage,
+                    px,
+                    py
+                )
             end
 
             love.graphics.setColor(1, 1, 1)
