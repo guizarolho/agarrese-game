@@ -6,6 +6,7 @@ function love.load()
     Bump = require "lib/bump"
     TEsound = require "lib/tesound"
     Astar = require "lib/a-star"
+    Anim8 = require "lib/anim8"
 
     -- Import Objects
     Player = require "objects/player"
