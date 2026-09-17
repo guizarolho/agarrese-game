@@ -17,6 +17,7 @@ function Stage:new(stageMap, world)
     self:buildPathNodes()
 end
 
+-- Builds path nodes for A*
 function Stage:buildPathNodes()
     self.pathNodes = {}
     self.nodeAt = {}
@@ -33,6 +34,8 @@ function Stage:buildPathNodes()
     end
 end
 
+-- Builds cell data grid
+-- https://discussions.unity.com/t/unity-learn-course-create-a-2d-roguelike-game-add-obstacles-2-add-obstacles/1645084
 function Stage:buildGrid()
     for rowIndex, rowMap in ipairs(self.grid) do
         self.cells[rowIndex] = {}
@@ -100,6 +103,7 @@ function Stage:buildGrid()
     end
 end
 
+-- Helpers
 function Stage:getCell(col, row)
     if row < 1 or row > #self.cells then return nil end
     if col < 1 or col > #self.cells[row] then return nil end
@@ -136,6 +140,7 @@ function Stage:collect(col, row)
     return nil
 end
 
+-- Rendering
 function Stage:draw()
     for row, rowCells in ipairs(self.cells) do
         for col, cell in ipairs(rowCells) do

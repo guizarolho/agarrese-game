@@ -49,14 +49,22 @@ end
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
     -- TEsound.play(collectEffect)
+
+    -- Vision
     if collectedChar == ItemsEnum.Vision then
         local originalRadius = self.visionRadius.radius
         self.visionRadius:alter(originalRadius + _G.VISION_BUFF_FACTOR)
         GAME_TIMER:after(_G.VISION_BUFF_TIMER, function() self.visionRadius:alter(originalRadius) end)
+
+    -- Speed
     elseif collectedChar == ItemsEnum.Speed then
         GAME_TIMER:during(_G.SPEED_BUFF_TIMER, function() self.speed = _G.SPEED_BUFF_FACTOR end, function() self.speed = _G.PLAYER_SPEED end)
+
+    -- Invincible
     elseif collectedChar == ItemsEnum.Invincible then
         GAME_TIMER:during(_G.INVINCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
+
+    -- Fragment
     elseif collectedChar == ItemsEnum.Fragment then
         self.memoriesCollected = self.memoriesCollected + 1
         self.gameTimer:addTime(_G.GAME_TIMER_BUFF)
@@ -80,6 +88,10 @@ function Player:move(dx, dy, dt)
 
     self.x = x
     self.y = y
+end
+
+function Player:onHit()
+    self.hitPoints = self.hitPoints - 1
 end
 
 function Player:update(dt)

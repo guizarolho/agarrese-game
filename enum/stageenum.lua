@@ -1,3 +1,4 @@
+-- https://github.com/Przemekkkth/love-pacman/tree/main
 local StageEnum = {
     ['test'] = {
         '############################',

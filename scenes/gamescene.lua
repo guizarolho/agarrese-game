@@ -39,21 +39,32 @@ function GameScene:reset()
 end
 
 function GameScene:update(dt)
-   if self.paused then
+    if self.paused then
         return
     end
+
     self.gameTimer:update(dt)
 
     if not self.gameTimer.gameOver then
+
         self.player:update(dt)
+
+        for _, enemy in ipairs(self.enemies) do
+            enemy:update(dt)
+        end
 
         self.visionRadius:update(
             self.player.x + self.player.size / 2,
             self.player.y + self.player.size / 2
         )
 
-        self.stage:isComplete(self.player.memoriesCollected)
-        if not self.stage.exitHidden and self:isPlayerOnPortal() then
+        self.stage:isComplete(
+            self.player.memoriesCollected
+        )
+
+        if not self.stage.exitHidden
+            and self:isPlayerOnPortal()
+        then
             self:nextStage()
         end
     end
@@ -108,10 +119,13 @@ end
 
 function GameScene:draw()
     self.stage:draw()
+
     self.player:draw()
+
     for _, enemy in ipairs(self.enemies) do
         enemy:draw()
     end
+
     self.visionRadius:draw()
     self.gameTimer:draw()
 end
