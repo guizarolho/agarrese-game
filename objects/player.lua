@@ -87,9 +87,6 @@ function Player:new(stage, visionRadius, gameTimer, world)
 
     -- Load Collect Audio
     -- Load Audio On-hit 
-
-    -- Column / Row / Frame
-    -- anim8.newAnimation(self.grid('4-6', 1), 0.2) 
 end
 
 function Player:setSpawn(spawn)
@@ -204,17 +201,6 @@ function Player:draw()
     local scaleX = self.spriteSize / self.image:getWidth()
     local scaleY = self.spriteSize / self.image:getHeight()
 
-    if not self.isMoving then
-        love.graphics.draw(
-        self.image,
-        self.x - (self.spriteSize - self.size) / 2,
-        self.y - (self.spriteSize - self.size) / 2,
-        0,
-        scaleX,
-        scaleY
-    )
-    end
-
     if self.isMoving then
         if self.direction == 'up' then
                 self.animations.up:draw(
@@ -241,8 +227,16 @@ function Player:draw()
                     self.y
                 )
         end
-    end
-
+        else
+            love.graphics.draw(
+                self.image,
+                self.x - (self.spriteSize - self.size) / 2,
+                self.y - (self.spriteSize - self.size) / 2,
+                0,
+                scaleX,
+                scaleY
+            )
+        end
     love.graphics.setColor(1, 1, 1)
 end
 
