@@ -13,6 +13,16 @@ function Stage:new(stageMap, world)
     self.enemySpawns = {}
     self.exitHidden = true
 
+    -- Stage Sprites
+    self.tile = love.graphics.newImage("sprites/chao_level2.png")
+
+    self.wallTiles = {}
+    self.wallTile = love.graphics.newImage("sprites/wall_level2.png")
+    self.wallTile2 = love.graphics.newImage("sprites/wall_level1.png")
+    
+    self.wallTiles[1] = self.wallTile
+    self.wallTiles[2] = self.wallTile2
+
     self:buildGrid()
     self:buildPathNodes()
 
@@ -190,10 +200,20 @@ function Stage:draw()
             local px = (col - 1) * TILE_SIZE
             local py = (row - 1) * TILE_SIZE
 
+            -- Floor Tile
+            love.graphics.draw(
+                self.tile,
+                px,
+                py
+            )
+
             -- Walls
             if cell.obstacle then
-                love.graphics.setColor(0.3, 0.3, 0.3)
-                love.graphics.rectangle("fill", px, py, TILE_SIZE, TILE_SIZE)
+                love.graphics.draw(
+                    self.wallTiles[1],
+                    px,
+                    py
+                )
 
             -- Portal
             elseif not self.exitHidden and cell.char == SpawnEnum.PortalSpawn then
@@ -234,7 +254,6 @@ function Stage:draw()
                     py
                 )
             end
-
             love.graphics.setColor(1, 1, 1)
         end
     end

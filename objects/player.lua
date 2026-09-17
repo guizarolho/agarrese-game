@@ -18,6 +18,9 @@ function Player:new(stage, visionRadius, gameTimer, world)
     self.memoriesCollected = 0
     self.gameTimer = gameTimer
 
+    self.direction = 'down'
+    self.isMoving = false
+
     self.world:add(
         self,
         self.x,
@@ -34,26 +37,53 @@ function Player:new(stage, visionRadius, gameTimer, world)
     --------------------------------------------------------------------
     self.animations = {}
 
-    local animationWalkDown = {
-        love.graphics.newImage('sprites/joaquim_run_front1.png'),
-        love.graphics.newImage('sprites/joaquim_front.png'),
-        love.graphics.newImage('sprites/joaquim_run_front2.png')
-    }
-    self.animations.down = Anim8.newAnimation(animationWalkDown, 0.1)
+    self.walkDownImage = love.graphics.newImage("sprites/joaquim_walk_down.png")
+    local walkDownGrid = Anim8.newGrid(
+        _G.TILE_SIZE,
+        _G.TILE_SIZE,
+        self.walkDownImage:getWidth(),
+        self.walkDownImage:getHeight()
+    )
+    self.animations.down = Anim8.newAnimation(
+        walkDownGrid("1-4", 1),
+        0.3
+    )
 
-    local animationWalkRight = {
-        love.graphics.newImage('sprites/joaquim_run_right1.png'),
-        love.graphics.newImage('sprites/joaquim_right.png'),
-        love.graphics.newImage('sprites/joaquim_run_right2.png')
-    }
-    self.animations.right = Anim8.newAnimation(animationWalkRight, 0.1)
+    self.walkUpImage = love.graphics.newImage("sprites/joaquim_walk_up.png")
+    local walkUpGrid = Anim8.newGrid(
+        _G.TILE_SIZE,
+        _G.TILE_SIZE,
+        self.walkUpImage:getWidth(),
+        self.walkUpImage:getHeight()
+    )
+    self.animations.up = Anim8.newAnimation(
+        walkUpGrid("1-4", 1),
+        0.3
+    )
 
-    local animationWalkUp = {
-        love.graphics.newImage('sprites/joaquim_run_back1.png'),
-        love.graphics.newImage('sprites/joaquim_back.png'),
-        love.graphics.newImage('sprites/joaquim_run_back2.png')
-    }
-    self.animations.up = Anim8.newAnimation(animationWalkUp, 0.1)
+    self.walkRightImage = love.graphics.newImage("sprites/joaquim_walk_right.png")
+    local walkUpGrid = Anim8.newGrid(
+        _G.TILE_SIZE,
+        _G.TILE_SIZE,
+        self.walkRightImage:getWidth(),
+        self.walkRightImage:getHeight()
+    )
+    self.animations.right = Anim8.newAnimation(
+        walkUpGrid("1-4", 1),
+        0.3
+    )
+
+    self.walkLeftImage = love.graphics.newImage("sprites/joaquim_walk_left.png")
+    local walkLeftGrid = Anim8.newGrid(
+        _G.TILE_SIZE,
+        _G.TILE_SIZE,
+        self.walkLeftImage:getWidth(),
+        self.walkLeftImage:getHeight()
+    )
+    self.animations.left = Anim8.newAnimation(
+        walkLeftGrid("1-4", 1),
+        0.3
+    )
 
     -- Load Collect Audio
     -- Load Audio On-hit 
@@ -132,19 +162,34 @@ function Player:update(dt)
 
     if love.keyboard.isDown("w") then
         dy = -1
+        self.direction = 'up'
+        self.animations.up:update(dt)
     end
 
     if love.keyboard.isDown("a") then
         dx = -1
+        self.direction = 'left'
+        self.animations.left:update(dt)
     end
 
     if love.keyboard.isDown("s") then
         dy = 1
+        self.direction = 'down'
+        self.animations.down:update(dt)
     end
 
     if love.keyboard.isDown("d") then
         dx = 1
+        self.direction = 'right'
+        self.animations.right:update(dt)
     end
+
+    if dx ~= 0 or dy ~= 0 then
+        self.isMoving = true    
+    else
+        self.isMoving = false
+    end
+
 
     self:move(dx, dy, dt)
     self:checkCollectable()
@@ -159,7 +204,8 @@ function Player:draw()
     local scaleX = self.spriteSize / self.image:getWidth()
     local scaleY = self.spriteSize / self.image:getHeight()
 
-    love.graphics.draw(
+    if not self.isMoving then
+        love.graphics.draw(
         self.image,
         self.x - (self.spriteSize - self.size) / 2,
         self.y - (self.spriteSize - self.size) / 2,
@@ -167,6 +213,36 @@ function Player:draw()
         scaleX,
         scaleY
     )
+    end
+
+    if self.isMoving then
+        if self.direction == 'up' then
+                self.animations.up:draw(
+                    self.walkUpImage,
+                    self.x,
+                    self.y
+            )
+        elseif self.direction == 'left' then
+                self.animations.left:draw(
+                    self.walkLeftImage,
+                    self.x,
+                    self.y
+                )
+        elseif self.direction == 'down' then
+            self.animations.down:draw(
+                    self.walkDownImage,
+                    self.x,
+                    self.y
+                )
+        elseif self.direction == 'right' then
+                self.animations.right:draw(
+                    self.walkRightImage,
+                    self.x,
+                    self.y
+                )
+        end
+    end
+
     love.graphics.setColor(1, 1, 1)
 end
 
