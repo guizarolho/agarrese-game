@@ -28,6 +28,8 @@ function love.load()
     SceneEnum = require "enum/sceneenum"
     ItemsEnum = require "enum/itemsenum"
     SpawnEnum = require "enum/spawnenum"
+    WallEnum = require "enum/wallenum"
+    FloorEnum = require "enum/floorenum"
 
     -- Global Variables
     TILE_SIZE = 32

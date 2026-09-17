@@ -10,14 +10,14 @@ end
 
 
 function GameScene:reset()
-    self.stageIndex = 0
+    self.stageIndex = 1
     self.paused = false
     self.gameOver = false
 
     self.world = Bump.newWorld(TILE_SIZE)
 
     self.stage = Stage(
-        StageEnum[self.stageIndex],
+        self.stageIndex,
         self.world
     )
 
@@ -99,7 +99,7 @@ function GameScene:nextStage()
 
     -- New Stage
     self.stage = Stage(
-        StageEnum[self.stageIndex],
+        self.stageIndex,
         self.world
     )
 

@@ -1,7 +1,7 @@
 local Stage = Object:extend()
 
-function Stage:new(stageMap, world)
-    self.grid = stageMap
+function Stage:new(stageIndex, world)
+    self.grid = StageEnum[stageIndex]
     self.world = world
 
     self.totalMemories = 0
@@ -14,12 +14,12 @@ function Stage:new(stageMap, world)
     self.exitHidden = true
 
     -- Stage Sprites
-    self.tile = love.graphics.newImage("sprites/chao_level2.png")
 
-    self.wallTiles = {
-        love.graphics.newImage("sprites/wall_level2.png"),
-        love.graphics.newImage("sprites/wall_level1.png")
-    }
+    self.tile = love.graphics.newImage(FloorEnum[stageIndex])
+    self.wallTiles = {}
+    for index, path in ipairs(WallEnum[stageIndex]) do
+        self.wallTiles[index] = love.graphics.newImage(path)
+    end
 
     self:buildGrid()
     self:buildPathNodes()
