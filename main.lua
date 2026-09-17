@@ -14,6 +14,7 @@ function love.load()
     Stage = require "objects/stage"
     CellData = require "objects/celldata"
     GameTimer = require "objects/gametimer"
+    Life = require "objects/life"
 
     -- Import Scene
     SceneManager = require "scenes/scenemanager"

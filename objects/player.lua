@@ -12,8 +12,8 @@ function Player:new(stage, visionRadius, gameTimer, world)
     self.stage = stage
     self.world = world
     self.visionRadius = visionRadius
-    self.hitPoints = 3
 
+    self.hitPoints = 3
     self.isInvincible = false
     self.memoriesCollected = 0
     self.gameTimer = gameTimer

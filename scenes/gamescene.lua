@@ -23,6 +23,7 @@ function GameScene:reset()
 
     self.visionRadius = VisionRadius()
 
+    self.life = Life()
     self.gameTimer = GameTimer(_G.TIME_LIMIT)
     self.player = Player(
         self.stage,
@@ -129,15 +130,14 @@ end
 
 function GameScene:draw()
     self.stage:draw()
-
     self.player:draw()
-
     for _, enemy in ipairs(self.enemies) do
         enemy:draw()
     end
-
+    
     self.visionRadius:draw()
     self.gameTimer:draw()
+    self.life:draw()
 end
 
 function GameScene:keypressed(key)
