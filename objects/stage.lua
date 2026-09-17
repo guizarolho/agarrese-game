@@ -15,7 +15,11 @@ function Stage:new(stageIndex, world)
 
     -- Stage Sprites
 
-    self.tile = love.graphics.newImage(FloorEnum[stageIndex])
+    self.floorTiles = {}
+    for index, path in ipairs(FloorEnum[stageIndex]) do
+        self.floorTiles[index] = love.graphics.newImage(path)
+    end
+
     self.wallTiles = {}
     for index, path in ipairs(WallEnum[stageIndex]) do
         self.wallTiles[index] = love.graphics.newImage(path)
@@ -82,10 +86,8 @@ end
 function Stage:buildGrid()
     for rowIndex, rowMap in ipairs(self.grid) do
         self.cells[rowIndex] = {}
-
         for colIndex = 1, #rowMap do
             local char = rowMap:sub(colIndex, colIndex)
-
             if char == ItemsEnum.Fragment then
                 self.totalMemories = self.totalMemories + 1
             end
@@ -125,6 +127,7 @@ function Stage:buildGrid()
                 isCollectable,
                 char
             )
+            self.cells[rowIndex][colIndex]:setTileIndex()
 
             if isObstacle then
                 local obstacle = {}
@@ -132,7 +135,6 @@ function Stage:buildGrid()
                 local x = (colIndex - 1) * TILE_SIZE
                 local y = (rowIndex - 1) * TILE_SIZE
 
-                self.cells[rowIndex][colIndex]:setTileIndex()
                 self.world:add(
                     obstacle,
                     x,
@@ -201,7 +203,7 @@ function Stage:draw()
 
             -- Floor Tile
             love.graphics.draw(
-                self.tile,
+                self.floorTiles[self.cells[row][col].tileVariationIndex],
                 px,
                 py
             )
