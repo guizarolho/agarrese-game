@@ -2,9 +2,9 @@ local Player = Object:extend()
 
 function Player:new(stage, visionRadius, gameTimer, world)
     local spawn = stage.playerSpawn
-
     self.x = (spawn.col - 1) * _G.TILE_SIZE
     self.y = (spawn.row - 1) * _G.TILE_SIZE
+
     self.speed = _G.PLAYER_SPEED
     self.spriteSize = _G.TILE_SIZE
     self.size = _G.TILE_SIZE - 3
@@ -32,6 +32,11 @@ function Player:new(stage, visionRadius, gameTimer, world)
 
     -- Column / Row / Frame
     -- anim8.newAnimation(self.grid('4-6', 1), 0.2) 
+end
+
+function Player:setSpawn(spawn)
+    self.x = (spawn.col - 1) * _G.TILE_SIZE
+    self.y = (spawn.row - 1) * _G.TILE_SIZE
 end
 
 function Player:checkCollectable()

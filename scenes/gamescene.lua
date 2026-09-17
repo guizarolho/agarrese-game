@@ -32,7 +32,7 @@ function GameScene:reset()
     )
 
     self.enemies = {}
-    for index, value in ipairs(self.stage.enemySpawns) do
+    for index, _ in ipairs(self.stage.enemySpawns) do
         self.enemies[index] = Enemy(self.player, self.stage, index)
     end
     -- TESound:play(soundtrack)
@@ -92,20 +92,19 @@ function GameScene:nextStage()
         return
     end
 
+    -- New world
     self.world = Bump.newWorld(TILE_SIZE)
+
+    -- New Stage
     self.stage = Stage(
         StageEnum[self.stageIndex],
         self.world
     )
-    self.visionRadius:reset()
 
+    -- Reset Player
     self.player.stage = self.stage
     self.player.world = self.world
-
-    -- Spawn
-    self.player.x = TILE_SIZE
-    self.player.y = TILE_SIZE
-
+    self.player:setSpawn(self.stage.playerSpawn)
     self.world:add(
         self.player,
         self.player.x,
@@ -114,6 +113,17 @@ function GameScene:nextStage()
         self.player.size
     )
 
+    -- Reset Enemies
+    self.enemies = {}
+    for index, _ in ipairs(self.stage.enemySpawns) do
+        self.enemies[index] = Enemy(
+            self.player,
+            self.stage,
+            index
+        )
+    end
+
+    self.visionRadius:reset()
     self.player.memoriesCollected = 0
 end
 

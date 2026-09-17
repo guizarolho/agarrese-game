@@ -5,28 +5,28 @@ local astar = require("astar")
 
 function Enemy:new(player, stage, index)
     local spawn = stage.enemySpawns[index]
+    self.x = (spawn.col - 1) * _G.TILE_SIZE
+    self.y = (spawn.row - 1) * _G.TILE_SIZE
+
     self.player = player
     self.stage = stage
-
-    self.x = (spawn.col - 1) * TILE_SIZE
-    self.y = (spawn.row - 1) * TILE_SIZE
-
     self.speed = 90
     self.detectionRadius = 180
     self.attackRange = 30
-
     self.state = "idle"
-
     self.path = nil
     self.pathIndex = 1
 
     self.pathUpdateTimer = 0
     self.pathUpdateInterval = 0.35
 
-    self.spriteSize = TILE_SIZE
-    self.size = TILE_SIZE - 3
+    self.spriteSize = _G.TILE_SIZE
+    self.size = _G.TILE_SIZE - 3
+end
 
-    self.stage.world:add(self, self.x, self.y, self.size, self.size)
+function Enemy:setSpawn(spawn)
+    self.x = (spawn.col - 1) * _G.TILE_SIZE
+    self.y = (spawn.row - 1) * _G.TILE_SIZE
 end
 
 -- https://love2d.org/wiki/World:rayCast
