@@ -25,7 +25,7 @@ end
 function GameTimer:draw()
     love.graphics.setBlendMode("alpha")
     love.graphics.setColor(1, 0, 0, 1)
-    love.graphics.setFont(FONT)
+    love.graphics.setFont(love.graphics.newFont(50))
 
     love.graphics.print(
         string.format("%d", math.ceil(self.timeLeft)),
