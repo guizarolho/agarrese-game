@@ -109,6 +109,9 @@ end
 function GameScene:draw()
     self.stage:draw()
     self.player:draw()
+    for _, enemy in ipairs(self.enemies) do
+        enemy:draw()
+    end
     self.visionRadius:draw()
     self.gameTimer:draw()
 end
