@@ -12,7 +12,7 @@ function Enemy:new(player, stage, index)
     self.stage = stage
     self.speed = 90
     self.detectionRadius = 180
-    self.attackRange = 30
+    self.attackRange = 25
     self.state = "idle"
     self.path = nil
     self.pathIndex = 1
@@ -103,7 +103,7 @@ function Enemy:update(dt)
         if distToPlayer > self.attackRange or not canSeePlayer then
             self.state = "pursuit"
         else
-
+            self.player:onHit()
         end
     end
 end
