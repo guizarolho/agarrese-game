@@ -28,13 +28,33 @@ function Player:new(stage, visionRadius, gameTimer, world)
     self.image = love.graphics.newImage("sprites/joaquim_front.png")
     self.image:setFilter("nearest", "nearest")
 
-    -- self.animations = {}
-    -- self.animations.down  = anim8.newAnimation()
-    -- self.animations.left  = anim8.newAnimation()
-    -- self.animations.right = anim8.newAnimation()
-    -- self.animations.up    = anim8.newAnimation()
-    -- self.animations.dead  = anim8.newAnimation()
-    
+
+    --------------------------------------------------------------------
+    --- PLAYER ANIMATION
+    --------------------------------------------------------------------
+    self.animations = {}
+
+    local animationWalkDown = {
+        love.graphics.newImage('sprites/joaquim_run_front1.png'),
+        love.graphics.newImage('sprites/joaquim_front.png'),
+        love.graphics.newImage('sprites/joaquim_run_front2.png')
+    }
+    self.animations.down = Anim8.newAnimation(animationWalkDown, 0.1)
+
+    local animationWalkRight = {
+        love.graphics.newImage('sprites/joaquim_run_right1.png'),
+        love.graphics.newImage('sprites/joaquim_right.png'),
+        love.graphics.newImage('sprites/joaquim_run_right2.png')
+    }
+    self.animations.right = Anim8.newAnimation(animationWalkRight, 0.1)
+
+    local animationWalkUp = {
+        love.graphics.newImage('sprites/joaquim_run_back1.png'),
+        love.graphics.newImage('sprites/joaquim_back.png'),
+        love.graphics.newImage('sprites/joaquim_run_back2.png')
+    }
+    self.animations.up = Anim8.newAnimation(animationWalkUp, 0.1)
+
     -- Load Collect Audio
     -- Load Audio On-hit 
 
