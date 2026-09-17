@@ -42,6 +42,9 @@ function GameTimer:draw()
             "center"
         )
     end
+
+    -- Sets standard fonts
+    love.graphics.setFont(_G.FONT)
 end
 
 return GameTimer
