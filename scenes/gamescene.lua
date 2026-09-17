@@ -31,6 +31,10 @@ function GameScene:reset()
         self.world
     )
 
+    self.enemies = {}
+    for index, value in ipairs(self.stage.enemySpawns) do
+        self.enemies[index] = Enemy(self.player, self.stage, index)
+    end
     -- TESound:play(soundtrack)
 end
 

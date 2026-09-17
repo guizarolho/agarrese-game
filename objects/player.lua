@@ -25,10 +25,8 @@ function Player:new(stage, visionRadius, gameTimer, world)
         self.size,
         self.size
     )
-    self.image = love.graphics.newImage("sprites/joaquim.png")
+    self.image = love.graphics.newImage("sprites/joaquim_front.png")
     self.image:setFilter("nearest", "nearest")
-
-    -- Load Sprite
     -- Load Collect Audio
     -- Load Audio On-hit 
 
@@ -53,9 +51,7 @@ function Player:collect(col, row)
     -- TEsound.play(collectEffect)
     if collectedChar == ItemsEnum.Vision then
         local originalRadius = self.visionRadius.radius
-
         self.visionRadius:alter(originalRadius + _G.VISION_BUFF_FACTOR)
-
         GAME_TIMER:after(_G.VISION_BUFF_TIMER, function() self.visionRadius:alter(originalRadius) end)
     elseif collectedChar == ItemsEnum.Speed then
         GAME_TIMER:during(_G.SPEED_BUFF_TIMER, function() self.speed = _G.SPEED_BUFF_FACTOR end, function() self.speed = _G.PLAYER_SPEED end)

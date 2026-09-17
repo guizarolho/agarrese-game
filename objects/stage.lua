@@ -14,6 +14,23 @@ function Stage:new(stageMap, world)
     self.exitHidden = true
 
     self:buildGrid()
+    self:buildPathNodes()
+end
+
+function Stage:buildPathNodes()
+    self.pathNodes = {}
+    self.nodeAt = {}
+
+    for rowIndex, rowCells in ipairs(self.cells) do
+        self.nodeAt[rowIndex] = {}
+        for colIndex, cell in ipairs(rowCells) do
+            if not cell.obstacle then
+                local node = {x = colIndex, y = rowIndex}
+                table.insert(self.pathNodes, node)
+                self.nodeAt[rowIndex][colIndex] = node
+            end
+        end
+    end
 end
 
 function Stage:buildGrid()
@@ -122,7 +139,6 @@ end
 function Stage:draw()
     for row, rowCells in ipairs(self.cells) do
         for col, cell in ipairs(rowCells) do
-
             local px = (col - 1) * TILE_SIZE
             local py = (row - 1) * TILE_SIZE
 
@@ -130,6 +146,7 @@ function Stage:draw()
             if cell.obstacle then
                 love.graphics.setColor(0.3, 0.3, 0.3)
                 love.graphics.rectangle("fill", px, py, TILE_SIZE, TILE_SIZE)
+
             -- Portal
             elseif not self.exitHidden and cell.char == SpawnEnum.PortalSpawn then
                 love.graphics.setColor(1, 0, 1)
@@ -139,6 +156,7 @@ function Stage:draw()
                     py + TILE_SIZE / 2,
                     TILE_SIZE / 3
                 )
+
             -- Fragment Memories 
             elseif cell.collectable and cell.char == ItemsEnum.Fragment then
                 love.graphics.setColor(1, 1, 0.4)
