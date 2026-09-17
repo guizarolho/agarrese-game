@@ -13,6 +13,19 @@ function Stage:new(stageMap, world)
     self.enemySpawns = {}
     self.exitHidden = true
 
+    -- TILE_ANIMATION
+    self.portalImage = love.graphics.newImage("sprites/portal.png")
+    local portalGrid = Anim8.newGrid(
+        _G.TILE_SIZE,
+        _G.TILE_SIZE,
+        self.portalImage:getWidth(),
+        self.portalImage:getHeight()
+    )
+    self.portalAnimation = Anim8.newAnimation(
+        portalGrid("1-21", 1),
+        0.08
+    )
+
     self:buildGrid()
     self:buildPathNodes()
 end
@@ -103,6 +116,12 @@ function Stage:buildGrid()
     end
 end
 
+function Stage:update(dt)
+    if not self.exitHidden then
+        self.portalAnimation:update(dt)
+    end
+end
+
 -- Helpers
 function Stage:getCell(col, row)
     if row < 1 or row > #self.cells then return nil end
@@ -154,14 +173,11 @@ function Stage:draw()
 
             -- Portal
             elseif not self.exitHidden and cell.char == SpawnEnum.PortalSpawn then
-                love.graphics.setColor(1, 0, 1)
-                love.graphics.circle(
-                    "fill",
-                    px + TILE_SIZE / 2,
-                    py + TILE_SIZE / 2,
-                    TILE_SIZE / 3
+                self.portalAnimation:draw(
+                    self.portalImage,
+                    px,
+                    py
                 )
-
             -- Fragment Memories 
             elseif cell.collectable and cell.char == ItemsEnum.Fragment then
                 love.graphics.setColor(1, 1, 0.4)

@@ -44,6 +44,7 @@ function GameScene:update(dt)
         return
     end
 
+    self.stage:update(dt)
     self.gameTimer:update(dt)
 
     if not self.gameTimer.gameOver then
