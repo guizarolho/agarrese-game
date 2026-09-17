@@ -16,12 +16,10 @@ function Stage:new(stageMap, world)
     -- Stage Sprites
     self.tile = love.graphics.newImage("sprites/chao_level2.png")
 
-    self.wallTiles = {}
-    self.wallTile = love.graphics.newImage("sprites/wall_level2.png")
-    self.wallTile2 = love.graphics.newImage("sprites/wall_level1.png")
-    
-    self.wallTiles[1] = self.wallTile
-    self.wallTiles[2] = self.wallTile2
+    self.wallTiles = {
+        love.graphics.newImage("sprites/wall_level2.png"),
+        love.graphics.newImage("sprites/wall_level1.png")
+    }
 
     self:buildGrid()
     self:buildPathNodes()
@@ -134,6 +132,7 @@ function Stage:buildGrid()
                 local x = (colIndex - 1) * TILE_SIZE
                 local y = (rowIndex - 1) * TILE_SIZE
 
+                self.cells[rowIndex][colIndex]:setTileIndex()
                 self.world:add(
                     obstacle,
                     x,
@@ -210,7 +209,7 @@ function Stage:draw()
             -- Walls
             if cell.obstacle then
                 love.graphics.draw(
-                    self.wallTiles[1],
+                    self.wallTiles[self.cells[row][col].tileVariationIndex],
                     px,
                     py
                 )
