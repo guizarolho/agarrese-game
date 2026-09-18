@@ -10,7 +10,7 @@ end
 
 
 function GameScene:reset()
-    self.stageIndex = 4
+    self.stageIndex = 1
     self.paused = false
     self.gameOver = false
 
@@ -168,6 +168,7 @@ function GameScene:draw()
 end
 
 function GameScene:keypressed(key)
+    self.message:keypressed(key)
     if key == 'p' then
         self.paused = not self.paused
     end
