@@ -7,7 +7,7 @@ function Player:new(stage, visionRadius, gameTimer, world)
 
     self.speed = _G.PLAYER_SPEED
     self.spriteSize = _G.TILE_SIZE
-    self.size = _G.TILE_SIZE - 3
+    self.size = _G.TILE_SIZE - 4
 
     self.stage = stage
     self.world = world
