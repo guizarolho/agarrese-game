@@ -47,9 +47,9 @@ function Message:draw()
         0,
         0,
         _G.WINDOW_WIDTH,
-        WINDOW_HEIGHT
-
+        _G.WINDOW_HEIGHT
     )
+
     if self.image ~= nil then
         local imageWidth = self.image:getWidth()
         local imageHeight = self.image:getHeight()
@@ -89,7 +89,7 @@ function Message:draw()
         )
     end
 
-    -- Mensagem
+    -- Mensagem principal
     if self.message ~= nil then
         love.graphics.setColor(1, 1, 1, 1)
 
@@ -101,6 +101,17 @@ function Message:draw()
             "center"
         )
     end
+
+    -- Instrução para fechar a mensagem
+    love.graphics.setColor(1, 1, 1, 1)
+
+    love.graphics.printf(
+        "Aperte Esc para continuar",
+        20,
+        _G.WINDOW_HEIGHT - 35,
+        _G.WINDOW_WIDTH - 40,
+        "right"
+    )
 
     love.graphics.setColor(1, 1, 1, 1)
 end

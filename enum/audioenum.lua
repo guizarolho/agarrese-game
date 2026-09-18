@@ -2,11 +2,12 @@ local AudioEnum = {
     Hit = 'sfx/playerhit.mp3',
     GameOver = 'sfx/game_over.wav',
     Win = 'sfx/victory.wav',
+    Theme = 'sfx/musicamenucreditos.ogg',
     Collect = 'sfx/collect_sfx.mp3',
     [1] = 'sfx/music_level1.mp3',
     [2] = 'sfx/music_level2.mp3',
     [3] = 'sfx/music_level3.mp3',
-    [4] = 'sfx/music_level4.mp3'
+    [4] = 'sfx/music_level4.mp3',
 }
 
 return AudioEnum
