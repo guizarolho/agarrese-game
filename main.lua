@@ -36,7 +36,7 @@ function love.load()
 
     -- Global Variables
     TILE_SIZE = 32
-    TIME_LIMIT = 999
+    TIME_LIMIT = 900
     TIMER = Timer()
     GAME_TIMER = Timer()
     FONT = love.graphics.newFont(18)
@@ -52,7 +52,7 @@ function love.load()
     SPEED_BUFF_FACTOR = 300
     SPEED_BUFF_TIMER = 5
     INVINCIBLE_BUFF_TIMER = 5
-    GAME_TIMER_BUFF = 20
+    GAME_TIMER_BUFF = 5
 
     -- Músicas
     -- MUSIC = {
@@ -83,8 +83,8 @@ function love.load()
     -- end
 
     -- CURRENT_MUSIC = nil
-    TEsound.volume("sfx", 0.8)
-    TEsound.volume("music", 0.5)
+    TEsound.volume("sfx", 0.5)
+    TEsound.volume("music", 0.1)
 
     -- Config SceneManager
     MENU = Menu()

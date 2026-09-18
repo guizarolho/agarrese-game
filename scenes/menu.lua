@@ -1,18 +1,18 @@
 Menu = Object:extend()
---[[
+
 function Menu:new()
 
     love.graphics.setFont(FONT)
 
     -- Carrega a imagem de fundo
     -- colocar o diretorio correto da imagem de fundo do menu
-    self.background = love.graphics.newImage("assets/menu_background.png")
+    -- self.background = love.graphics.newImage("assets/menu_background.png")
+    self.title = love.graphics.newImage("illustrations/title.png")
 
-end ]]
+end
 
 function Menu:enter()
     TEsound.stop("music")
-    -- playMusic("menu")
 end
 
 function Menu:update(dt)
@@ -24,14 +24,12 @@ function Menu:keypressed(key)
 end
 
 function Menu:draw()
-
-    --[[ Desenha o fundo
     love.graphics.draw(
-        self.background,
+        self.title,
         0,
         0
     )
-    ]]
+    
 
     local text =[[
         Agarre-se

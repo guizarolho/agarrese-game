@@ -1,9 +1,6 @@
 Credits = Object:extend()
 
 function Credits:new()
-    -- Add background image
-    -- self.background = love.graphics.newImage("assets/credits_background.png")
-
     love.graphics.setFont(FONT)
 end
 
@@ -40,7 +37,7 @@ function Credits:draw()
         screenHeight / 2,
         0,
         scale,
-        scale,
+        scale,Eu gostava de música 
         imageWidth / 2,
         imageHeight / 2
     )
