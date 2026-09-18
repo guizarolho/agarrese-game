@@ -40,10 +40,10 @@ function GameScene:reset()
 
     self.transitioning = false
     self.stageMessages = {
-        [1] = "fase1, aperte Esc para continuar",
-        [2] = "fase2, aperte Esc para continuar",
-        [3] = "fase3, aperte Esc para continuar",
-        [4] = "fase4, aperte Esc para continuar"
+        [1] = "Minha menina tirando sua primeira fotografia com todo mundo reunido., aperte Esc para continuar",
+        [2] = "Me diverti tanto com o Pedro nesse verão., aperte Esc para continuar",
+        [3] = "O bolo que ela fazia, meu favorito…, aperte Esc para continuar",
+        [4] = "Eu gostava de música, aperte Esc para continuar"
     }
 
     self.videoPlayer = nil

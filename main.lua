@@ -95,7 +95,7 @@ function love.load()
     SceneManager:addScene(SceneEnum.Menu, MENU)
     SceneManager:addScene(SceneEnum.Game, GAME)
     SceneManager:addScene(SceneEnum.Credits, CREDITS)
-    SceneManager:changeScene(SceneEnum.Credits)
+    SceneManager:changeScene(SceneEnum.Menu)
 end
 
 
