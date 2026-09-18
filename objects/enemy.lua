@@ -138,24 +138,6 @@ function Enemy:draw()
         love.graphics.setColor(1, 0, 0)
     end
 
-    love.graphics.rectangle(
-        "fill",
-        self.x,
-        self.y,
-        self.spriteSize,
-        self.spriteSize
-    )
-
-    if self.state ~= "idle" then
-        love.graphics.setColor(1, 1, 0, 0.2)
-        love.graphics.line(
-            self.x + TILE_SIZE / 2,
-            self.y + TILE_SIZE / 2,
-            self.player.x + TILE_SIZE / 2,
-            self.player.y + TILE_SIZE / 2
-        )
-    end
-
     local scaleX = self.spriteSize / self.image:getWidth()
     local scaleY = self.spriteSize / self.image:getHeight()
 
@@ -167,6 +149,16 @@ function Enemy:draw()
         scaleX,
         scaleY
     )
+
+    if self.state ~= "idle" then
+        love.graphics.setColor(1, 1, 0)
+        love.graphics.line(
+            self.x + TILE_SIZE / 2,
+            self.y + TILE_SIZE / 2,
+            self.player.x + TILE_SIZE / 2,
+            self.player.y + TILE_SIZE / 2
+        )
+    end
 
     love.graphics.setColor(1, 1, 1)
 end
