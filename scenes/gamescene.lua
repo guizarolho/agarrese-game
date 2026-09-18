@@ -39,13 +39,6 @@ function GameScene:reset()
     end
 
     self.transitioning = false
-    self.stageMessages = {
-        [1] = "Minha menina tirando sua primeira fotografia com todo mundo reunido., aperte Esc para continuar",
-        [2] = "Me diverti tanto com o Pedro nesse verão., aperte Esc para continuar",
-        [3] = "O bolo que ela fazia, meu favorito…, aperte Esc para continuar",
-        [4] = "Eu gostava de música, aperte Esc para continuar"
-    }
-
     self.videoPlayer = nil
     self.message = Message()
 end
@@ -114,10 +107,11 @@ function GameScene:beforeNextStage()
 
     self.transitioning = true
     self.message:show(
-        self.stageMessages[self.stageIndex],
+        MessageEnum[self.stageIndex],
         function()
             self:nextStage()
-        end
+        end,
+        PhotoEnum[self.stageIndex]
     )
 end
 
@@ -185,7 +179,7 @@ function GameScene:nextStage()
     self.visionRadius:reset()
     self.gameTimer:reset()
     self:updateMusic()
-    
+
     TEsound.play(AudioEnum.Win, "static", "sfx")
 end
 
