@@ -29,6 +29,10 @@ function Player:new(stage, visionRadius, gameTimer, world)
 
     self.hitCooldown = 0
 
+    self.visionBuffStacks = 0 
+    self.baseVisionRadius = self.visionRadius.radius
+    self.visionRevealed = false
+
     self.world:add(
         self,
         self.x,
@@ -114,17 +118,39 @@ function Player:checkCollectable()
     end
 end
 
+function Player:updateVisionRadius()
+    if self.visionRevealed then
+        self.visionRadius:alter(10000000)
+        return
+    end
+ 
+    local radius = self.baseVisionRadius
+    if self.visionBuffStacks > 0 then
+        radius = radius + _G.VISION_BUFF_FACTOR
+    end
+ 
+    self.visionRadius:alter(radius)
+end
+
+function Player:resetVision()
+    self.visionBuffStacks = 0
+    self.visionRevealed = false
+    self.baseVisionRadius = 150
+    self.visionRadius:alter(self.baseVisionRadius)
+end
+
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
-    -- TODO: playSound("fragmentos") aqui, mas só pros itens específicos
-    -- que você decidir (Vision, Speed, Invincible, Fragment, ou uma
-    -- combinação deles) -- ainda falta definir quais terão esse som
 
     -- Vision
     if collectedChar == ItemsEnum.Vision then
-        local originalRadius = self.visionRadius.radius
-        self.visionRadius:alter(originalRadius + _G.VISION_BUFF_FACTOR)
-        GAME_TIMER:after(_G.VISION_BUFF_TIMER, function() self.visionRadius:alter(originalRadius) end)
+        self.visionBuffStacks = self.visionBuffStacks + 1
+        self:updateVisionRadius()
+ 
+        GAME_TIMER:after(_G.VISION_BUFF_TIMER, function()
+            self.visionBuffStacks = math.max(0, self.visionBuffStacks - 1)
+            self:updateVisionRadius()
+        end)
 
     -- Speed
     elseif collectedChar == ItemsEnum.Speed then
@@ -139,10 +165,12 @@ function Player:collect(col, row)
         self.memoriesCollected = self.memoriesCollected + 1
         self.gameTimer:addTime(_G.GAME_TIMER_BUFF)
         if self.stage:isComplete(self.memoriesCollected) then
-            self.visionRadius:alter(10000000)
+            self.visionRevealed = true
         else
-            self.visionRadius:alter(self.visionRadius.radius + 50)
+            self.baseVisionRadius = self.baseVisionRadius + 50
         end
+        self:updateVisionRadius()
+        TEsound.play(AudioEnum.Collect, "static", "sfx")
     end
 end
 

@@ -1,11 +1,8 @@
 Menu = Object:extend()
 
 function Menu:new()
-
     love.graphics.setFont(FONT)
-
     self.title = love.graphics.newImage("illustrations/title.png")
-
 end
 
 function Menu:enter()
@@ -45,8 +42,8 @@ function Menu:draw()
         10,
         10
     )
-
-    local text = [[
+    
+    local text =[[
         Agarre-se
         
         Como jogar: use W, A, S, D para mover seu personagem pelo labirinto.
@@ -68,7 +65,6 @@ function Menu:draw()
         screenWidth - 100,
         "center"
     )
-
 end
 
 return Menu

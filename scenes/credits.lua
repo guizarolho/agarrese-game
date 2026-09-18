@@ -16,6 +16,7 @@ function Credits:enter()
         "music"
     )
 
+    TEsound.stop("sfx")
 end
 
 function Credits:update(dt)
@@ -35,6 +36,8 @@ function Credits:draw()
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
 
+
+    -- Message
     local text = [[
         Créditos Game
 
