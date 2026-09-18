@@ -2,14 +2,15 @@ Life = Object:extend()
 
 function Life:new(player)
     self.player = player
-    self.maximum = 3
-    self.current = self.player.hitPoints
+    self.current = self.player.currentHitPoints
+    self.maximum = self.player.maxHitPoints
+    
     self.width = 150
     self.height = 10
 end
 
 function Life:update(dt)
-    self.current = self.player.hitPoints
+    self.current = self.player.currentHitPoints
 end
 
 function Life:draw()

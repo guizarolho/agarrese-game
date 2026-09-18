@@ -43,7 +43,7 @@ function Message:draw()
             _G.WINDOW_WIDTH,
             _G.WINDOW_HEIGHT
         )
-    
+
         if self.message ~= nil then
             love.graphics.setColor(1, 1, 1, 1)
             love.graphics.print(

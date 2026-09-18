@@ -10,9 +10,9 @@ end
 
 
 function GameScene:reset()
-    self.stageIndex = 1
+    self.stageIndex = 4
     self.paused = false
-    self.gameOver = false
+    self.gameClear = false
 
     self.world = Bump.newWorld(TILE_SIZE)
 
@@ -66,6 +66,8 @@ function GameScene:update(dt)
 
     if not self.gameTimer.gameOver then
 
+    if not self.gameTimer.gameOver and not self.player.gameOver then
+        self.life:update(dt)
         self.player:update(dt)
 
         for _, enemy in ipairs(self.enemies) do
@@ -121,7 +123,7 @@ function GameScene:nextStage()
     self.transitioning = false
 
     if not StageEnum[self.stageIndex] then
-        self.gameOver = true
+        self.gameClear = true
         SceneManager:changeScene(SceneEnum.Credits)
         return
     end
@@ -165,14 +167,25 @@ end
 function GameScene:draw()
     self.stage:draw()
     self.player:draw()
+
     for _, enemy in ipairs(self.enemies) do
         enemy:draw()
     end
-    
-    self.message:draw()
+
     self.visionRadius:draw()
     self.gameTimer:draw()
     self.life:draw()
+
+    if self.gameTimer.gameOver or self.player.gameOver then
+        self.message:show(
+            "GAME OVER",
+            function()
+                SceneManager:changeScene(SceneEnum.Menu)
+            end
+        )
+    end
+    
+    self.message:draw()
 end
 
 function GameScene:keypressed(key)

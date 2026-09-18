@@ -7,16 +7,22 @@ function Player:new(stage, visionRadius, gameTimer, world)
 
     self.speed = _G.PLAYER_SPEED
     self.spriteSize = _G.TILE_SIZE
-    self.size = _G.TILE_SIZE - 3
+    self.size = _G.TILE_SIZE - 4
 
     self.stage = stage
     self.world = world
     self.visionRadius = visionRadius
 
-    self.hitPoints = 3
-    self.isInvincible = false
+    self.currentHitPoints = 3
+    self.maxHitPoints = 3
+
+    self.isItemInvincible = false
+    self.isHitInvincible = false
+    self.isVisible = true
     self.memoriesCollected = 0
+
     self.gameTimer = gameTimer
+    self.gameOver = false
 
     self.direction = 'down'
     self.isMoving = false
@@ -126,7 +132,7 @@ function Player:collect(col, row)
 
     -- Invincible
     elseif collectedChar == ItemsEnum.Invincible then
-        GAME_TIMER:during(_G.INVINCIBLE_BUFF_TIMER, function() self.isInvincible = true end, function() self.isInvincible = false end)
+        GAME_TIMER:during(_G.INVINCIBLE_BUFF_TIMER, function() self.isItemInvincible = true end, function() self.isItemInvincible = false end)
 
     -- Fragment
     elseif collectedChar == ItemsEnum.Fragment then
@@ -162,6 +168,30 @@ function Player:onHit()
     self.hitPoints = self.hitPoints - 1
     playSound("dano")
     self.hitCooldown = 1 -- 1 segundo de invencibilidade após tomar dano
+    if self.isInvincible or self.isHitInvincible then
+        return
+    end
+
+    self.currentHitPoints = self.currentHitPoints - 1
+    self:hitInvincibility()
+
+    if self.currentHitPoints <= 0 then
+        self.currentHitPoints = 0
+        self.gameOver = true
+    end
+end
+
+function Player:hitInvincibility()
+    self.isHitInvincible = true
+
+    GAME_TIMER:every(0.1, function()
+        self.isVisible = not self.isVisible
+    end, 10)
+
+    GAME_TIMER:after(1, function()
+        self.isHitInvincible = false
+        self.isVisible = true
+    end)
 end
 
 function Player:update(dt)
@@ -207,9 +237,14 @@ function Player:update(dt)
 end
 
 function Player:draw()
-    love.graphics.setColor(1, 1, 1, 1)
-    if self.isInvincible then
+    if not self.isVisible then
+        return
+    end
+    if self.isHitInvincible then
         love.graphics.setColor(1, 0, 0)
+    end
+    if self.isItemInvincible then
+        love.graphics.setColor(1, 1, 0)
     end
 
     local scaleX = self.spriteSize / self.image:getWidth()
