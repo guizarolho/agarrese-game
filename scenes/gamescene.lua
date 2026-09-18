@@ -23,7 +23,6 @@ function GameScene:reset()
 
     self.visionRadius = VisionRadius()
 
-    self.life = Life()
     self.gameTimer = GameTimer(_G.TIME_LIMIT)
     self.player = Player(
         self.stage,
@@ -45,6 +44,7 @@ function GameScene:reset()
         [4] = "fase4"
     }
 
+    self.life = Life(self.player)
     self.message = Message()
     -- TESound:play(soundtrack)
 end
@@ -65,6 +65,7 @@ function GameScene:update(dt)
     if not self.gameTimer.gameOver then
 
         self.player:update(dt)
+        self.life:update(dt)
 
         for _, enemy in ipairs(self.enemies) do
             enemy:update(dt)
