@@ -12,7 +12,7 @@ function Menu:enter()
 
     -- Música do menu
     TEsound.playLooping(
-        AudioEnum.theme,
+        AudioEnum.Theme,
         "static",
         "music"
     )
