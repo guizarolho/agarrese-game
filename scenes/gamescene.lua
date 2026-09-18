@@ -170,6 +170,7 @@ function GameScene:nextStage()
     self.player.stage = self.stage
     self.player.world = self.world
     self.player:setSpawn(self.stage.playerSpawn)
+    self.player:resetVision()
     self.world:add(
         self.player,
         self.player.x,
