@@ -7,7 +7,7 @@ function CellData:new(isObstacle, isCollectable, utf8char)
 end
 
 function CellData:setTileIndex()
-    self.tileVariationIndex = love.math.random(1, 2)
+    self.tileVariationIndex = love.math.random(1, 3)
 end
 
 return CellData

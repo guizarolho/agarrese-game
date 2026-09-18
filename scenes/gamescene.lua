@@ -36,6 +36,16 @@ function GameScene:reset()
     for index, _ in ipairs(self.stage.enemySpawns) do
         self.enemies[index] = Enemy(self.player, self.stage, index)
     end
+
+    self.transitioning = false
+    self.stageMessages = {
+        [1] = "fase1",
+        [2] = "fase2",
+        [3] = "fase3",
+        [4] = "fase4"
+    }
+
+    self.message = Message()
     -- TESound:play(soundtrack)
 end
 
@@ -72,6 +82,20 @@ function GameScene:update(dt)
     end
 end
 
+function GameScene:beforeNextStage()
+    if self.transitioning then
+        return
+    end
+
+    self.transitioning = true
+    self.message:show(
+        self.stageMessages[self.stageIndex],
+        function()
+            self:nextStage()
+        end
+    )
+end
+
 function GameScene:isPlayerOnPortal()
     local portal = self.stage.portalSpawn
     if not portal then return false end
@@ -87,6 +111,7 @@ end
 
 function GameScene:nextStage()
     self.stageIndex = self.stageIndex + 1
+    self.transitioning = false
 
     if not StageEnum[self.stageIndex] then
         self.gameOver = true

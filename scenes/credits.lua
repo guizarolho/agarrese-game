@@ -2,7 +2,7 @@ Credits = Object:extend()
 
 function Credits:new()
     -- Add background image
-    self.background = love.graphics.newImage("assets/credits_background.png")
+    -- self.background = love.graphics.newImage("assets/credits_background.png")
 
     love.graphics.setFont(FONT)
 end
