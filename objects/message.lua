@@ -44,12 +44,14 @@ function Message:draw()
             _G.WINDOW_HEIGHT
         )
     
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.print(
-            self.message,
-            50,
-            420
-        )
+        if self.message ~= nil then
+            love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.print(
+                self.message,
+                50,
+                420
+            )
+        end
     end
 end
 
