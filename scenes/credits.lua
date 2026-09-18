@@ -6,7 +6,7 @@ end
 
 function Credits:enter()
     TEsound.stop("music")
-    -- playMusic("menu")
+    TEsound.stop("sfx")
 end
 
 function Credits:update(dt)
@@ -18,30 +18,6 @@ end
 
 function Credits:draw()
     local screenWidth = love.graphics.getWidth()
-    local screenHeight = love.graphics.getHeight()
-
-    --[[
-    local imageWidth = self.background:getWidth()
-    local imageHeight = self.background:getHeight()
-
-    -- Calculate scale to fill the entire screen
-    local scale = math.max(
-        screenWidth / imageWidth,
-        screenHeight / imageHeight
-    )
-
-    -- Draw background centered and scaled
-    love.graphics.draw(
-        self.background,
-        screenWidth / 2,
-        screenHeight / 2,
-        0,
-        scale,
-        scale,Eu gostava de música 
-        imageWidth / 2,
-        imageHeight / 2
-    )
-    ]]
 
     -- Message
     local text = [[

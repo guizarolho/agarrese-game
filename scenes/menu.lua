@@ -1,16 +1,8 @@
 Menu = Object:extend()
 
 function Menu:new()
-
     love.graphics.setFont(FONT)
-
-    -- Carrega a imagem de fundo
-    -- colocar o diretorio correto da imagem de fundo do menu
-    -- self.background = love.graphics.newImage("assets/menu_background.png")
     self.title = love.graphics.newImage("illustrations/title.png")
-
-
-
 end
 
 function Menu:enter()
@@ -35,7 +27,6 @@ function Menu:draw()
         10
     )
     
-
     local text =[[
         Agarre-se
         
@@ -58,7 +49,6 @@ function Menu:draw()
         screenWidth - 100,
         "center"
     )
-
 end
 
 return Menu
