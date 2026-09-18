@@ -1,6 +1,6 @@
-# 🎮 [Nome do Jogo]
+# 🎮 Agarre-se
 
-Agarre-se
+Agarre-se é um jogo de labirinto sobre memória, tempo e as pequenas coisas que dão significado a uma vida.  Você acompanha Joaquim, um homem idoso que vive com Alzheimer, enquanto ele percorre labirintos formados a partir de suas próprias lembranças. Em cada fase, explore cenários inspirados em momentos importantes de seu passado e encontre fragmentos de memória antes que o tempo se esgote.  Quanto mais memórias Joaquim recupera, maior se torna seu campo de visão, revelando pouco a pouco o caminho à sua frente.
 
 ## 🛠️ Tecnologias
 
