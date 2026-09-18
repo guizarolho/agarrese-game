@@ -7,6 +7,7 @@ end
 function GameTimer:reset(limit)
     self.timeLeft = limit or 60
     self.gameOver = false
+    self.playSound = false
 end
 
 function GameTimer:update(dt)
@@ -19,6 +20,11 @@ function GameTimer:update(dt)
     if self.timeLeft <= 0 then
         self.timeLeft = 0
         self.gameOver = true
+
+        if not self.hasPlayedSound then
+            TEsound.play(AudioEnum.GameOver, "static", "sfx")
+            self.hasPlayedSound = true
+        end
     end
 end
 
