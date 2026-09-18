@@ -1,6 +1,6 @@
 # 🎮 [Nome do Jogo]
 
-Um jogo desenvolvido em **Lua** utilizando o framework **LÖVE (Love2D)**, para a semana criativa **Criathlon Méliès 2026**.
+Agarre-se
 
 ## 🛠️ Tecnologias
 
@@ -13,7 +13,7 @@ Um jogo desenvolvido em **Lua** utilizando o framework **LÖVE (Love2D)**, para 
 
 Baixe e instale a versão do LÖVE compatível com o seu sistema operacional:
 
-[Download do LÖVE 2D](https://love2d.org/?utm_source=chatgpt.com)
+[Download do LÖVE 2D](https://love2d.org/)
 
 ### 2. Clone ou baixe o projeto
 
@@ -50,27 +50,15 @@ O LÖVE irá procurar o arquivo `main.lua` e iniciar o jogo.
 
 ## 📁 Estrutura básica
 
-A estrutura do projeto segue a organização padrão de um jogo desenvolvido com LÖVE:
-
-```text
-.
-├── main.lua
-├── src/
-├── assets/
-│   ├── images/
-│   ├── audio/
-│   └── ...
-└── README.md
-```
-
-O arquivo `main.lua` funciona como ponto de entrada da aplicação.
+A estrutura do projeto segue a organização padrão de um jogo desenvolvido com LÖVE
+O arquivo `main.lua` funciona como ponto de entrada da aplicação
 
 ## 🎮 Controles
 
 | Tecla          | Ação            |
 | -------------- | --------------- |
 | `WASD` / Setas | Movimento       |
-| `Enter`        | Confirmar       |
+| `P`            | Pause           |
 | `Esc`          | Voltar / Pausar |
 | ...            | ...             |
 
@@ -94,7 +82,22 @@ love jogo.love
 
 ## 📝 Desenvolvimento
 
-Este projeto foi desenvolvido como parte de uma **Game Jam**, utilizando LÖVE 2D como framework para a criação do jogo.
+Um jogo desenvolvido em **Lua** utilizando o framework **LÖVE (Love2D)**, para a semana criativa **Criathlon Méliès 2026**.
+
+Muito foi desenvolvido levando em base os repositórios abaixo:
+
+https://github.com/Przemekkkth/love-pacman/tree/main
+https://github.com/challacade/legend-of-lua
+
+Libs utilizadas = {
+    - astar
+    - anim8
+    - binocles
+    - bump
+    - classic
+    - tesound
+    - timer
+}
 
 ---
 
