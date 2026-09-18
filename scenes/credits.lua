@@ -1,13 +1,11 @@
 Credits = Object:extend()
 
---[[
 function Credits:new()
     -- Add background image
     self.background = love.graphics.newImage("assets/credits_background.png")
 
     love.graphics.setFont(FONT)
 end
-]]
 
 function Credits:update(dt)
 end
@@ -44,11 +42,11 @@ function Credits:draw()
     ]]
 
     -- Message
-    local text = 
+    local text = [[
+        Obrigado por jogar!
+        ADICIONAR OS NOMES DO GRUPO
+    ]]
     
-    "Obrigado por jogar!\n\n".. 
-    "ADICIONAR OS NOMES DO GRUPO\n\n" ..
-
 
     love.graphics.printf(
         text,

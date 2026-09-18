@@ -28,15 +28,18 @@ function Menu:draw()
     )
     ]]
 
-    local text =
-        "Agarre-se
-        \n\n" ..
-        "Como jogar: use W, A, S, D para mover seu personagem pelo labirinto.
-        \n\n" ..
-        "Seu objetivo é coletar todos os fragmentos de memória para desbloquear a memória completa." ..
-        "Fuja do tempo e colete itens para te ajudar no caminho. Boa sorte!
-        \n\n" ..
-        "Pressione qualquer tecla para começar o jogo."
+    local text =[[
+        Agarre-se
+        
+        Como jogar: use W, A, S, D para mover seu personagem pelo labirinto.
+        
+        Seu objetivo é coletar todos os fragmentos de memória para desbloquear a memória completa.
+        Fuja do tempo e colete itens para te ajudar no caminho. Boa sorte!
+        
+
+
+        Pressione qualquer tecla para começar o jogo.
+    ]]
 
     local screenWidth = love.graphics.getWidth()
 
