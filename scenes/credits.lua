@@ -48,14 +48,47 @@ function Credits:draw()
 
     -- Message
     local text = [[
-        ADICIONAR OS NOMES DO GRUPO
+        Créditos Game
+
+        Programação: 
+        Guilherme Mendes Fontes
+
+        Game design: 
+        Victor Resende 
+        Flávio Eduardo Romano
+
+        Pixel Art:
+        Alberto Kin
+        Giovanna Vieira
+
+        Creative Writing:
+        Camille Borges
+
+        Ilustração:
+        Maria Clara Hasegawa
+
+        Temática:
+        Lucas Rossi 
+
+        Teaser: 
+        João Vitor Carvalho
+        Max Ribeiro
+        André Costalonga
+        Lucas Rossi
+
+        Trilhas e efeitos:
+        Natal - Leberch Christmas
+        The Fishing - AmmitMusics
+        Kitchen cooking show - Alex Morgan
+        This Heavy Metal - MrClaps
+        Player Hit - Grey Frog Games
     ]]
     
 
     love.graphics.printf(
         text,
         0,
-        screenHeight / 2 - FONT:getHeight() / 2,
+        200,
         screenWidth,
         "center"
     )
