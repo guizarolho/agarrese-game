@@ -162,11 +162,11 @@ end
 function GameScene:draw()
     self.stage:draw()
     self.player:draw()
+
     for _, enemy in ipairs(self.enemies) do
         enemy:draw()
     end
-    
-    self.message:draw()
+
     self.visionRadius:draw()
     self.gameTimer:draw()
     self.life:draw()
@@ -179,6 +179,8 @@ function GameScene:draw()
             end
         )
     end
+    
+    self.message:draw()
 end
 
 function GameScene:keypressed(key)
