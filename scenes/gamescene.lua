@@ -185,6 +185,8 @@ function GameScene:nextStage()
     self.visionRadius:reset()
     self.gameTimer:reset()
     self:updateMusic()
+    
+    TEsound.play(AudioEnum.Win, "static", "sfx")
 end
 
 function GameScene:draw()
