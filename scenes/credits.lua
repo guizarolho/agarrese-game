@@ -5,53 +5,44 @@ function Credits:new()
 end
 
 function Credits:enter()
+
+    -- Para a música anterior
     TEsound.stop("music")
-    -- playMusic("menu")
+
+    -- Música dos créditos
+    TEsound.playLooping(
+        AudioEnum.theme,
+        "static",
+        "music"
+    )
+
 end
 
 function Credits:update(dt)
+
 end
 
 function Credits:keypressed(key)
+
+    TEsound.stop("music")
+
     SceneManager:changeScene(SceneEnum.Menu)
+
 end
 
 function Credits:draw()
+
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
 
-    --[[
-    local imageWidth = self.background:getWidth()
-    local imageHeight = self.background:getHeight()
-
-    -- Calculate scale to fill the entire screen
-    local scale = math.max(
-        screenWidth / imageWidth,
-        screenHeight / imageHeight
-    )
-
-    -- Draw background centered and scaled
-    love.graphics.draw(
-        self.background,
-        screenWidth / 2,
-        screenHeight / 2,
-        0,
-        scale,
-        scale,Eu gostava de música 
-        imageWidth / 2,
-        imageHeight / 2
-    )
-    ]]
-
-    -- Message
     local text = [[
         Créditos Game
 
-        Programação: 
+        Programação:  
         Guilherme Mendes Fontes
 
-        Game design: 
-        Victor Resende 
+        Game design:  
+        Victor Resende  
         Flávio Eduardo Romano
 
         Pixel Art:
@@ -65,9 +56,9 @@ function Credits:draw()
         Maria Clara Hasegawa
 
         Temática:
-        Lucas Rossi 
+        Lucas Rossi  
 
-        Teaser: 
+        Teaser:  
         João Vitor Carvalho
         Max Ribeiro
         André Costalonga
@@ -80,7 +71,6 @@ function Credits:draw()
         This Heavy Metal - MrClaps
         Player Hit - Grey Frog Games
     ]]
-    
 
     love.graphics.printf(
         text,
@@ -89,6 +79,7 @@ function Credits:draw()
         screenWidth,
         "center"
     )
+
 end
 
 return Credits
