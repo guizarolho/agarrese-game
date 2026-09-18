@@ -11,6 +11,7 @@ function Menu:new()
 end ]]
 
 function Menu:enter()
+    TEsound.stop("music")
     -- playMusic("menu")
 end
 

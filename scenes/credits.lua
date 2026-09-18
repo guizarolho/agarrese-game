@@ -8,6 +8,7 @@ function Credits:new()
 end
 
 function Credits:enter()
+    TEsound.stop("music")
     -- playMusic("menu")
 end
 

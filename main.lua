@@ -32,6 +32,7 @@ function love.load()
     SpawnEnum = require "enum/spawnenum"
     WallEnum = require "enum/wallenum"
     FloorEnum = require "enum/floorenum"
+    AudioEnum = require "enum/audioenum"
 
     -- Global Variables
     TILE_SIZE = 32
@@ -82,6 +83,8 @@ function love.load()
     -- end
 
     -- CURRENT_MUSIC = nil
+    TEsound.volume("sfx", 0.8)
+    TEsound.volume("music", 0.5)
 
     -- Config SceneManager
     MENU = Menu()
@@ -98,6 +101,7 @@ end
 
 function love.update(dt)
     TIMER:update(dt)
+    TEsound.cleanup()
 
     if not GAME.paused then
         GAME_TIMER:update(dt)

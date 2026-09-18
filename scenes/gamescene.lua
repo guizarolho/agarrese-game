@@ -6,11 +6,12 @@ end
 
 function GameScene:enter()
     self:reset()
+    self:updateMusic()
 end
 
 
 function GameScene:reset()
-    self.stageIndex = 4
+    self.stageIndex = 1
     self.paused = false
     self.gameClear = false
 
@@ -47,14 +48,20 @@ function GameScene:reset()
 
     self.videoPlayer = nil
     self.message = Message()
-    self:updateMusic()
 end
 
 function GameScene:updateMusic()
-    -- local key = "fase" .. self.stageIndex
-    -- if MUSIC[key] then
-    --     playMusic(key)
-    -- end
+    TEsound.stop("music")
+
+    local music = AudioEnum[self.stageIndex]
+
+    if music then
+        TEsound.playLooping(
+            music,
+            "stream",
+            "music"
+        )
+    end
 end
 
 function GameScene:update(dt)
@@ -133,6 +140,7 @@ function GameScene:nextStage()
 
     if not StageEnum[self.stageIndex] then
         self.gameClear = true
+        TEsound.stop("music")
         self.videoPlayer = VideoPlayer(
             "video/ending.ogv",
             function()

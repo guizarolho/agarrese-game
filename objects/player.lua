@@ -164,10 +164,11 @@ function Player:onHit()
     if self.hitCooldown > 0 then
         return
     end
-    if self.isInvincible or self.isHitInvincible then
+    if self.isItemInvincible or self.isHitInvincible then
         return
     end
 
+    TEsound.play(AudioEnum.Hit, "static", "sfx")
     self.currentHitPoints = self.currentHitPoints - 1
     self:hitInvincibility()
 
