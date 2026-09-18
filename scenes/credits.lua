@@ -11,7 +11,7 @@ function Credits:enter()
 
     -- Música dos créditos
     TEsound.playLooping(
-        AudioEnum.theme,
+        AudioEnum.Theme,
         "static",
         "music"
     )
