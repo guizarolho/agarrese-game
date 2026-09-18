@@ -12,7 +12,7 @@ end
 function GameScene:reset()
     self.stageIndex = 1
     self.paused = false
-    self.gameOver = false
+    self.gameClear = false
 
     self.world = Bump.newWorld(TILE_SIZE)
 
@@ -61,9 +61,7 @@ function GameScene:update(dt)
 
     self.stage:update(dt)
     self.gameTimer:update(dt)
-
-    if not self.gameTimer.gameOver then
-
+    if not self.gameTimer.gameOver and not self.player.gameOver then
         self.player:update(dt)
         self.life:update(dt)
 
@@ -120,7 +118,7 @@ function GameScene:nextStage()
     self.transitioning = false
 
     if not StageEnum[self.stageIndex] then
-        self.gameOver = true
+        self.gameClear = true
         SceneManager:changeScene(SceneEnum.Credits)
         return
     end
@@ -171,6 +169,16 @@ function GameScene:draw()
     self.visionRadius:draw()
     self.gameTimer:draw()
     self.life:draw()
+
+    if self.gameTimer.gameOver or self.player.gameOver then
+        love.graphics.printf(
+            "GAME OVER",
+            0,
+            WINDOW_HEIGHT / 2,
+            WINDOW_WIDTH,
+            "center"
+        )
+    end
 end
 
 function GameScene:keypressed(key)

@@ -33,16 +33,6 @@ function GameTimer:draw()
         10
     )
 
-    if self.gameOver then
-        love.graphics.printf(
-            "GAME OVER",
-            0,
-            WINDOW_HEIGHT / 2,
-            WINDOW_WIDTH,
-            "center"
-        )
-    end
-
     -- Sets standard fonts
     love.graphics.setFont(_G.FONT)
 end

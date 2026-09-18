@@ -13,10 +13,14 @@ function Player:new(stage, visionRadius, gameTimer, world)
     self.world = world
     self.visionRadius = visionRadius
 
-    self.hitPoints = 3
+    self.currentHitPoints = 3
+    self.maxHitPoints = 3
+
     self.isInvincible = false
     self.memoriesCollected = 0
+
     self.gameTimer = gameTimer
+    self.gameOver = false
 
     self.direction = 'down'
     self.isMoving = false
@@ -151,7 +155,16 @@ function Player:move(dx, dy, dt)
 end
 
 function Player:onHit()
-    self.hitPoints = self.hitPoints - 1
+    if self.isInvincible then
+        return
+    end
+
+    self.currentHitPoints = self.currentHitPoints - 1
+
+    if self.currentHitPoints <= 0 then
+        self.currentHitPoints = 0
+        self.gameOver = true
+    end
 end
 
 function Player:update(dt)
