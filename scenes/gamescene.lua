@@ -181,8 +181,9 @@ function GameScene:nextStage()
         )
     end
 
-    self.visionRadius:reset()
     self.player.memoriesCollected = 0
+    self.visionRadius:reset()
+    self.gameTimer:reset()
     self:updateMusic()
 end
 

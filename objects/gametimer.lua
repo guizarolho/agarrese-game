@@ -1,6 +1,10 @@
 local GameTimer = Object:extend()
 
-function GameTimer:new(limit)
+function GameTimer:new()
+    self:reset()
+end
+
+function GameTimer:reset(limit)
     self.timeLeft = limit or 60
     self.gameOver = false
 end
