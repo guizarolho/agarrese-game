@@ -10,6 +10,9 @@ end
 function Credits:update(dt)
 end
 
+function Credits:enter()
+end
+
 function Credits:keypressed(key)
     SceneManager:changeScene(SceneEnum.Menu)
 end

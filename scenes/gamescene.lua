@@ -10,7 +10,7 @@ end
 
 
 function GameScene:reset()
-    self.stageIndex = 1
+    self.stageIndex = 4
     self.paused = false
     self.gameClear = false
 
