@@ -21,6 +21,8 @@ function Player:new(stage, visionRadius, gameTimer, world)
     self.direction = 'down'
     self.isMoving = false
 
+    self.hitCooldown = 0
+
     self.world:add(
         self,
         self.x,
@@ -108,7 +110,9 @@ end
 
 function Player:collect(col, row)
     local collectedChar = self.stage:collect(col, row)
-    -- TEsound.play(collectEffect)
+    -- TODO: playSound("fragmentos") aqui, mas só pros itens específicos
+    -- que você decidir (Vision, Speed, Invincible, Fragment, ou uma
+    -- combinação deles) -- ainda falta definir quais terão esse som
 
     -- Vision
     if collectedChar == ItemsEnum.Vision then
@@ -151,10 +155,20 @@ function Player:move(dx, dy, dt)
 end
 
 function Player:onHit()
+    if self.hitCooldown > 0 then
+        return
+    end
+
     self.hitPoints = self.hitPoints - 1
+    playSound("dano")
+    self.hitCooldown = 1 -- 1 segundo de invencibilidade após tomar dano
 end
 
 function Player:update(dt)
+    if self.hitCooldown > 0 then
+        self.hitCooldown = self.hitCooldown - dt
+    end
+
     local dx, dy = 0, 0
 
     if love.keyboard.isDown("w") then

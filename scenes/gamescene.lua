@@ -23,6 +23,7 @@ function GameScene:reset()
 
     self.visionRadius = VisionRadius()
 
+    self.life = Life()
     self.gameTimer = GameTimer(_G.TIME_LIMIT)
     self.player = Player(
         self.stage,
@@ -38,24 +39,25 @@ function GameScene:reset()
 
     self.transitioning = false
     self.stageMessages = {
-        [1] = "fase1",
-        [2] = "fase2",
-        [3] = "fase3",
-        [4] = "fase4"
+        [1] = "fase1, aperte Esc para continuar",
+        [2] = "fase2, aperte Esc para continuar",
+        [3] = "fase3, aperte Esc para continuar",
+        [4] = "fase4, aperte Esc para continuar"
     }
 
-    self.life = Life(self.player)
     self.message = Message()
-    -- TESound:play(soundtrack)
+    self:updateMusic()
+end
+
+function GameScene:updateMusic()
+    local key = "fase" .. self.stageIndex
+    if MUSIC[key] then
+        playMusic(key)
+    end
 end
 
 function GameScene:update(dt)
     if self.paused then
-        return
-    end
-
-    if self.message.active then
-        self.message:update(dt)
         return
     end
 
@@ -65,7 +67,6 @@ function GameScene:update(dt)
     if not self.gameTimer.gameOver then
 
         self.player:update(dt)
-        self.life:update(dt)
 
         for _, enemy in ipairs(self.enemies) do
             enemy:update(dt)
@@ -158,6 +159,7 @@ function GameScene:nextStage()
 
     self.visionRadius:reset()
     self.player.memoriesCollected = 0
+    self:updateMusic()
 end
 
 function GameScene:draw()

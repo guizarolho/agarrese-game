@@ -7,6 +7,10 @@ function Credits:new()
     love.graphics.setFont(FONT)
 end
 
+function Credits:enter()
+    playMusic("menu")
+end
+
 function Credits:update(dt)
 end
 
