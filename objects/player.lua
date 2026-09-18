@@ -168,13 +168,17 @@ function Player:onHit()
         return
     end
 
-    TEsound.play(AudioEnum.Hit, "static", "sfx")
     self.currentHitPoints = self.currentHitPoints - 1
     self:hitInvincibility()
+
 
     if self.currentHitPoints <= 0 then
         self.currentHitPoints = 0
         self.gameOver = true
+
+        TEsound.play(AudioEnum.GameOver, "static", "sfx")
+    else 
+        TEsound.play(AudioEnum.Hit, "static", "sfx")
     end
 end
 
