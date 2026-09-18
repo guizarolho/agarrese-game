@@ -54,6 +54,11 @@ function GameScene:update(dt)
         return
     end
 
+    if self.message.active then
+        self.message:update(dt)
+        return
+    end
+
     self.stage:update(dt)
     self.gameTimer:update(dt)
 
