@@ -9,6 +9,8 @@ function Menu:new()
     -- self.background = love.graphics.newImage("assets/menu_background.png")
     self.title = love.graphics.newImage("illustrations/title.png")
 
+
+
 end
 
 function Menu:enter()
@@ -26,8 +28,11 @@ end
 function Menu:draw()
     love.graphics.draw(
         self.title,
+        750,
+        250,
         0,
-        0
+        10,
+        10
     )
     
 
