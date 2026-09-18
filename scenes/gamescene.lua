@@ -23,7 +23,6 @@ function GameScene:reset()
 
     self.visionRadius = VisionRadius()
 
-    self.life = Life()
     self.gameTimer = GameTimer(_G.TIME_LIMIT)
     self.player = Player(
         self.stage,
@@ -32,6 +31,7 @@ function GameScene:reset()
         self.world
     )
 
+    self.life = Life(self.player)
     self.enemies = {}
     for index, _ in ipairs(self.stage.enemySpawns) do
         self.enemies[index] = Enemy(self.player, self.stage, index)
@@ -45,26 +45,35 @@ function GameScene:reset()
         [4] = "fase4, aperte Esc para continuar"
     }
 
+    self.videoPlayer = nil
     self.message = Message()
     self:updateMusic()
 end
 
 function GameScene:updateMusic()
-    local key = "fase" .. self.stageIndex
-    if MUSIC[key] then
-        playMusic(key)
-    end
+    -- local key = "fase" .. self.stageIndex
+    -- if MUSIC[key] then
+    --     playMusic(key)
+    -- end
 end
 
 function GameScene:update(dt)
+    if self.videoPlayer then
+        self.videoPlayer:update(dt)
+        return
+    end
+
     if self.paused then
+        return
+    end
+
+    if self.message.active then
+        self.message:update(dt)
         return
     end
 
     self.stage:update(dt)
     self.gameTimer:update(dt)
-
-    if not self.gameTimer.gameOver then
 
     if not self.gameTimer.gameOver and not self.player.gameOver then
         self.life:update(dt)
@@ -124,7 +133,12 @@ function GameScene:nextStage()
 
     if not StageEnum[self.stageIndex] then
         self.gameClear = true
-        SceneManager:changeScene(SceneEnum.Credits)
+        self.videoPlayer = VideoPlayer(
+            "video/ending.ogv",
+            function()
+                SceneManager:changeScene(SceneEnum.Credits)
+            end
+        )
         return
     end
 
@@ -165,6 +179,10 @@ function GameScene:nextStage()
 end
 
 function GameScene:draw()
+    if self.videoPlayer then
+        self.videoPlayer:draw()
+        return
+    end
     self.stage:draw()
     self.player:draw()
 

@@ -8,13 +8,10 @@ function Credits:new()
 end
 
 function Credits:enter()
-    playMusic("menu")
+    -- playMusic("menu")
 end
 
 function Credits:update(dt)
-end
-
-function Credits:enter()
 end
 
 function Credits:keypressed(key)
@@ -50,7 +47,6 @@ function Credits:draw()
 
     -- Message
     local text = [[
-        Obrigado por jogar!
         ADICIONAR OS NOMES DO GRUPO
     ]]
     

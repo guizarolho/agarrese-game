@@ -164,10 +164,6 @@ function Player:onHit()
     if self.hitCooldown > 0 then
         return
     end
-
-    self.hitPoints = self.hitPoints - 1
-    playSound("dano")
-    self.hitCooldown = 1 -- 1 segundo de invencibilidade após tomar dano
     if self.isInvincible or self.isHitInvincible then
         return
     end

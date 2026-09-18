@@ -11,7 +11,7 @@ function Menu:new()
 end ]]
 
 function Menu:enter()
-    playMusic("menu")
+    -- playMusic("menu")
 end
 
 function Menu:update(dt)

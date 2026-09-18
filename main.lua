@@ -23,6 +23,7 @@ function love.load()
     Menu = require "scenes/menu"
     GameScene = require "scenes/gamescene"    
     Credits = require "scenes/credits"
+    VideoPlayer = require "scenes/videoplayer"
 
     -- Import Enums
     StageEnum = require "enum/stageenum"
@@ -52,37 +53,35 @@ function love.load()
     INVINCIBLE_BUFF_TIMER = 5
     GAME_TIMER_BUFF = 20
 
-       -- Músicas
-    MUSIC = {
-        menu = love.audio.newSource("sfx/musicamenucreditos.ogg", "stream"),
-        credits = love.audio.newSource("sfx/musicamenucreditos.ogg", "stream"),
-        fase1 = love.audio.newSource("sfx/musicafase1.mp3", "stream"),
-        fase2 = love.audio.newSource("sfx/musicafase2mp3.mp3", "stream"),
-        fase3 = love.audio.newSource("sfx/musicafase3.mp3", "stream"),
-        fase4 = love.audio.newSource("sfx/musicafase4.mp3", "stream"),
-        dano = love.audio.newSource("sfx/musicadano.mp3", "static"),
-        fragmentos = love.audio.newSource("sfx/musicafragmentos.MP3", "static"),
-    }
+    -- Músicas
+    -- MUSIC = {
+    --     menu = love.audio.newSource("sfx/musicamenucreditos.ogg", "stream"),
+    --     credits = love.audio.newSource("sfx/musicamenucreditos.ogg", "stream"),
+    --     fase1 = love.audio.newSource("sfx/musicafase1.mp3", "stream"),
+    --     fase2 = love.audio.newSource("sfx/musicafase2mp3.mp3", "stream"),
+    --     fase3 = love.audio.newSource("sfx/musicafase3.mp3", "stream"),
+    --     fase4 = love.audio.newSource("sfx/musicafase4.mp3", "stream"),
+    --     dano = love.audio.newSource("sfx/musicadano.mp3", "static"),
+    --     fragmentos = love.audio.newSource("sfx/musicafragmentos.MP3", "static"),
+    -- }
     
-love.audio.setVolume(0.1) -- volume master normal
+    -- love.audio.setVolume(0.1) -- volume master normal
 
-MUSIC.menu:setVolume(0.5)
-MUSIC.credits:setVolume(0.5)
-MUSIC.fase1:setVolume(0.5)
-MUSIC.fase2:setVolume(0.5)
-MUSIC.fase3:setVolume(0.5)
-MUSIC.fase4:setVolume(0.5)
-MUSIC.dano:setVolume(1.0)
-MUSIC.fragmentos:setVolume(1.0)
+    -- MUSIC.menu:setVolume(0.5)
+    -- MUSIC.credits:setVolume(0.5)
+    -- MUSIC.fase1:setVolume(0.5)
+    -- MUSIC.fase2:setVolume(0.5)
+    -- MUSIC.fase3:setVolume(0.5)
+    -- MUSIC.fase4:setVolume(0.5)
+    -- MUSIC.dano:setVolume(1.0)
+    -- MUSIC.fragmentos:setVolume(1.0)
+    -- for key, source in pairs(MUSIC) do
+    --     if key ~= "dano" and key ~= "fragmentos" then
+    --         source:setLooping(true)
+    --     end
+    -- end
 
-
-for key, source in pairs(MUSIC) do
-    if key ~= "dano" and key ~= "fragmentos" then
-        source:setLooping(true)
-    end
-end
-
-    CURRENT_MUSIC = nil
+    -- CURRENT_MUSIC = nil
 
     -- Config SceneManager
     MENU = Menu()
@@ -115,31 +114,31 @@ function love.draw()
     SceneManager:draw()
 end
 
-function playSound(soundKey)
-    local sound = MUSIC[soundKey]
-    if not sound then return end
+-- function playSound(soundKey)
+--     local sound = MUSIC[soundKey]
+--     if not sound then return end
 
-    -- clona a fonte pra permitir sobreposição (ex: vários hits seguidos)
-    local instance = sound:clone()
-    instance:play()
-end
+--     -- clona a fonte pra permitir sobreposição (ex: vários hits seguidos)
+--     local instance = sound:clone()
+--     instance:play()
+-- end
 
--- Função global de troca de música
-function playMusic(musicKey)
-    local newTrack = MUSIC[musicKey]
-    if not newTrack then
-        return
-    end
+-- -- Função global de troca de música
+-- function playMusic(musicKey)
+--     local newTrack = MUSIC[musicKey]
+--     if not newTrack then
+--         return
+--     end
 
-    if newTrack == CURRENT_MUSIC then
-        return
-    end
+--     if newTrack == CURRENT_MUSIC then
+--         return
+--     end
 
-    if CURRENT_MUSIC then
-        CURRENT_MUSIC:stop()
-    end
+--     if CURRENT_MUSIC then
+--         CURRENT_MUSIC:stop()
+--     end
 
-    CURRENT_MUSIC = newTrack
-    CURRENT_MUSIC:play()
+--     CURRENT_MUSIC = newTrack
+--     CURRENT_MUSIC:play()
 
-end
+-- end
