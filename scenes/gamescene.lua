@@ -11,7 +11,7 @@ end
 
 
 function GameScene:reset()
-    self.stageIndex = 1
+    self.stageIndex = 4
     self.paused = false
     self.gameClear = false
 
@@ -142,7 +142,7 @@ function GameScene:nextStage()
         self.gameClear = true
         TEsound.stop("music")
         self.videoPlayer = VideoPlayer(
-            "video/ending.ogv",
+            "video/game_ending.ogv",
             function()
                 SceneManager:changeScene(SceneEnum.Credits)
             end

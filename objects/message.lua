@@ -4,6 +4,7 @@ Message = Object:extend()
 function Message:new()
     self.active = false
     self.message = nil
+    self.image = nil
     self.onClose = nil
 
     love.graphics.setFont(_G.FONT)
