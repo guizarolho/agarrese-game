@@ -86,18 +86,22 @@ Um jogo desenvolvido em **Lua** utilizando o framework **LÖVE (Love2D)**, para 
 
 Muito foi desenvolvido levando em base os repositórios abaixo:
 
-https://github.com/Przemekkkth/love-pacman/tree/main
-https://github.com/challacade/legend-of-lua
+<ul>
+    <li>https://github.com/Przemekkkth/love-pacman/tree/main</li>
+    <li>https://github.com/challacade/legend-of-lua</li>
+</ul>
 
-Libs utilizadas = {
-    - astar
-    - anim8
-    - binocles
-    - bump
-    - classic
-    - tesound
-    - timer
-}
+## 📚 Bibliotecas utilizadas
+
+<ul>
+    <li>astar</li>
+    <li>Anim8</li>
+    <li>Binocles</li>
+    <li>Bump</li>
+    <li>Classic</li>
+    <li>TEsound</li>
+    <li>Timer</li>
+</ul>
 
 ---
 
