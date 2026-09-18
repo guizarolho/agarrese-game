@@ -1,14 +1,18 @@
 Message = Object:extend()
 
+-- Modal Class
 function Message:new()
     self.active = false
     self.message = nil
+    self.onClose = nil
 
     love.graphics.setFont(_G.FONT)
 end
 
-function Message:show()
+function Message:show(message, onClose)
     self.active = true
+    self.message = message
+    self.onClose = onClose
 end
 
 function Message:setMessage(message)
@@ -16,9 +20,17 @@ function Message:setMessage(message)
 end
 
 function Message:keypressed(key)
-    if key == 'escape' then
+    if key == 'escape' and self.active then
         self.active = false
+        
+        local callback = self.onClose
+
         self.message = nil
+        self.onClose = nil
+
+        if callback then 
+            callback()
+        end
     end
 end
 
