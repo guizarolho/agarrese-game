@@ -127,7 +127,7 @@ function Stage:buildGrid()
                 isCollectable,
                 char
             )
-            self.cells[rowIndex][colIndex]:setTileIndex()
+            self.cells[rowIndex][colIndex]:setFloorTileIndex(self.floorTiles)
 
             if isObstacle then
                 local obstacle = {}
@@ -142,6 +142,8 @@ function Stage:buildGrid()
                     TILE_SIZE,
                     TILE_SIZE
                 )
+
+                self.cells[rowIndex][colIndex]:setWallTileIndex(self.wallTiles)
 
                 table.insert(self.obstacles, obstacle)
             end
@@ -203,7 +205,7 @@ function Stage:draw()
 
             -- Floor Tile
             love.graphics.draw(
-                self.floorTiles[self.cells[row][col].tileVariationIndex],
+                self.floorTiles[self.cells[row][col].floorVariationIndex],
                 px,
                 py
             )
@@ -211,7 +213,7 @@ function Stage:draw()
             -- Walls
             if cell.obstacle then
                 love.graphics.draw(
-                    self.wallTiles[self.cells[row][col].tileVariationIndex],
+                    self.wallTiles[self.cells[row][col].wallVariationIndex],
                     px,
                     py
                 )

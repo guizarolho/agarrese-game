@@ -6,8 +6,12 @@ function CellData:new(isObstacle, isCollectable, utf8char)
     self.char = utf8char
 end
 
-function CellData:setTileIndex()
-    self.tileVariationIndex = love.math.random(1, 3)
+function CellData:setFloorTileIndex(tiles)
+    self.floorVariationIndex = love.math.random(#tiles)
+end
+
+function CellData:setWallTileIndex(tiles)
+    self.wallVariationIndex = love.math.random(#tiles)
 end
 
 return CellData
