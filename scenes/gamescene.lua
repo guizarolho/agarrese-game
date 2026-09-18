@@ -32,7 +32,7 @@ function GameScene:reset()
         self.world
     )
 
-    self.life = Life(self.player)
+    self.life = Life(self.player, self.stage)
     self.enemies = {}
     for index, _ in ipairs(self.stage.enemySpawns) do
         self.enemies[index] = Enemy(self.player, self.stage, index)
@@ -128,6 +128,19 @@ function GameScene:isPlayerOnPortal()
     return col == portal.col and row == portal.row
 end
 
+function GameScene:getWorldOffset()
+    local screenWidth = love.graphics.getWidth()
+    local screenHeight = love.graphics.getHeight()
+
+    local worldWidth = self.stage:getWidth()
+    local worldHeight = self.stage:getHeight()
+
+    local offsetX = (screenWidth - worldWidth) / 2
+    local offsetY = (screenHeight - worldHeight) / 2
+
+    return offsetX, offsetY
+end
+
 function GameScene:nextStage()
     self.stageIndex = self.stageIndex + 1
     self.transitioning = false
@@ -188,6 +201,11 @@ function GameScene:draw()
         self.videoPlayer:draw()
         return
     end
+
+    local offsetX, offsetY = self:getWorldOffset()
+    love.graphics.push()
+    love.graphics.translate(offsetX, offsetY)
+
     self.stage:draw()
     self.player:draw()
 
@@ -198,6 +216,8 @@ function GameScene:draw()
     self.visionRadius:draw()
     self.gameTimer:draw()
     self.life:draw()
+    love.graphics.pop()
+    
 
     if self.gameTimer.gameOver or self.player.gameOver then
         self.message:show(
@@ -207,7 +227,6 @@ function GameScene:draw()
             end
         )
     end
-    
     self.message:draw()
 end
 

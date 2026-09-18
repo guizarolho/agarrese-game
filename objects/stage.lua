@@ -196,6 +196,14 @@ function Stage:collect(col, row)
     return nil
 end
 
+function Stage:getWidth()
+    return #self.grid[1] * TILE_SIZE
+end
+
+function Stage:getHeight()
+    return #self.grid * TILE_SIZE
+end
+
 -- Rendering
 function Stage:draw()
     for row, rowCells in ipairs(self.cells) do
