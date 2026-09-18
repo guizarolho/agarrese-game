@@ -61,9 +61,10 @@ function GameScene:update(dt)
 
     self.stage:update(dt)
     self.gameTimer:update(dt)
+
     if not self.gameTimer.gameOver and not self.player.gameOver then
-        self.player:update(dt)
         self.life:update(dt)
+        self.player:update(dt)
 
         for _, enemy in ipairs(self.enemies) do
             enemy:update(dt)
@@ -171,12 +172,11 @@ function GameScene:draw()
     self.life:draw()
 
     if self.gameTimer.gameOver or self.player.gameOver then
-        love.graphics.printf(
+        self.message:show(
             "GAME OVER",
-            0,
-            WINDOW_HEIGHT / 2,
-            WINDOW_WIDTH,
-            "center"
+            function()
+                SceneManager:changeScene(SceneEnum.Menu)
+            end
         )
     end
 end
