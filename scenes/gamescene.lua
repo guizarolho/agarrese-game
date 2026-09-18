@@ -10,7 +10,7 @@ end
 
 
 function GameScene:reset()
-    self.stageIndex = 1
+    self.stageIndex = 4
     self.paused = false
     self.gameOver = false
 
@@ -77,7 +77,7 @@ function GameScene:update(dt)
         if not self.stage.exitHidden
             and self:isPlayerOnPortal()
         then
-            self:nextStage()
+            self:beforeNextStage()
         end
     end
 end
@@ -161,6 +161,7 @@ function GameScene:draw()
         enemy:draw()
     end
     
+    self.message:draw()
     self.visionRadius:draw()
     self.gameTimer:draw()
     self.life:draw()

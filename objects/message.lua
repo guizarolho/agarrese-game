@@ -15,10 +15,6 @@ function Message:show(message, onClose)
     self.onClose = onClose
 end
 
-function Message:setMessage(message)
-    self.message = message
-end
-
 function Message:keypressed(key)
     if key == 'escape' and self.active then
         self.active = false
